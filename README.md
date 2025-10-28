@@ -1,0 +1,32 @@
+# Kwilion
+
+_Automatically synced with your [v0.app](https://v0.app) deployments_
+
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/salonetechdepot-8542s-projects/v0-salone-tech-depot)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/BxmIg6z8vUR)
+
+## Overview
+
+Kwilion - Adapting your business for what's next through strategic technology solutions.
+
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+
+## Deployment
+
+Your project is live at:
+
+**[https://vercel.com/salonetechdepot-8542s-projects/v0-salone-tech-depot](https://vercel.com/salonetechdepot-8542s-projects/v0-salone-tech-depot)**
+
+## Build your app
+
+Continue building your app on:
+
+**[https://v0.app/chat/projects/BxmIg6z8vUR](https://v0.app/chat/projects/BxmIg6z8vUR)**
+
+## How It Works
+
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
