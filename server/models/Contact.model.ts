@@ -1,3 +1,6 @@
+// server/db/sequelize.ts (example)
+import "server-only";
+
 import {
   Table,
   Column,

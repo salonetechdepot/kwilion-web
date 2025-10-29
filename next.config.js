@@ -1,20 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Disable lightningcss to fix font issues
   experimental: {
+    // Skip Lightning CSS optimizations (safe unblock)
     optimizeCss: false,
+
+    // Keep DB libs server-side, quiets Sequelize warnings in RSC
+    serverComponentsExternalPackages: ["sequelize", "pg", "pg-hstore"],
   },
-  // Your existing config
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
-  },
+
+  // You had these already — keeping them as-is
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
+  images: { unoptimized: true },
   poweredByHeader: false,
 };
 
-module.exports = nextConfig;
+export default nextConfig;
