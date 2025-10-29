@@ -1,7 +1,17 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle2, Lightbulb, Code, Zap, Wrench, Users, Database, Shield, Smartphone } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  CheckCircle2,
+  Lightbulb,
+  Code,
+  Zap,
+  Wrench,
+  Users,
+  Database,
+  Shield,
+  Smartphone,
+} from "lucide-react";
 
 export default function ServicesPage() {
   return (
@@ -22,7 +32,8 @@ export default function ServicesPage() {
               Strategic Technology Services
             </h1>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_30%)]">
-              Comprehensive solutions from strategy to execution, tailored for Sierra Leonean businesses.
+              Comprehensive solutions from strategy to execution, tailored for
+              Sierra Leonean businesses.
             </p>
           </div>
         </div>
@@ -40,22 +51,29 @@ export default function ServicesPage() {
                     <Lightbulb className="h-7 w-7 text-primary-foreground" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl md:text-3xl">Digital Strategy Consulting</CardTitle>
-                    <p className="text-muted-foreground mt-1">Expert guidance for smarter business decisions.</p>
+                    <CardTitle className="text-2xl md:text-3xl">
+                      Digital Strategy Consulting
+                    </CardTitle>
+                    <p className="text-muted-foreground mt-1">
+                      Expert guidance for smarter business decisions.
+                    </p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-8 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  Before you invest in technology, invest in strategy. Our consulting services help you understand your
-                  current state, define your goals, and create a clear roadmap to digital transformation. We analyze
-                  your business processes, identify inefficiencies, and recommend technology solutions that deliver
-                  measurable ROI.
+                  Before you invest in technology, invest in strategy. Our
+                  consulting services help you understand your current state,
+                  define your goals, and create a clear roadmap to digital
+                  transformation. We analyze your business processes, identify
+                  inefficiencies, and recommend technology solutions that
+                  deliver measurable ROI.
                 </p>
                 <p className="leading-relaxed text-muted-foreground">
-                  Whether you're modernizing legacy systems, scaling operations, or entering new markets, our strategic
-                  guidance ensures your technology investments align with your business objectives and deliver tangible
-                  results.
+                  Whether you're modernizing legacy systems, scaling operations,
+                  or entering new markets, our strategic guidance ensures your
+                  technology investments align with your business objectives and
+                  deliver tangible results.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 pt-4">
@@ -76,8 +94,10 @@ export default function ServicesPage() {
                   <div className="space-y-3">
                     <h4 className="font-semibold">Ideal For</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Business leaders preparing for growth, new system implementation, or digital modernization.
-                      Perfect for companies seeking to maximize technology investments and minimize risk.
+                      Business leaders preparing for growth, new system
+                      implementation, or digital modernization. Perfect for
+                      companies seeking to maximize technology investments and
+                      minimize risk.
                     </p>
                     <Link href="/contact">
                       <Button className="mt-4 bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -99,20 +119,28 @@ export default function ServicesPage() {
                     <Code className="h-7 w-7 text-primary-foreground" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl md:text-3xl">Web & App Development</CardTitle>
-                    <p className="text-muted-foreground mt-1">Custom, scalable solutions built for your business.</p>
+                    <CardTitle className="text-2xl md:text-3xl">
+                      Web & App Development
+                    </CardTitle>
+                    <p className="text-muted-foreground mt-1">
+                      Custom, scalable solutions built for your business.
+                    </p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-8 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  We build robust, user-friendly web and mobile applications that solve real business problems. From
-                  customer-facing platforms to internal management systems, our development team creates solutions that
-                  are secure, scalable, and designed to grow with your business.
+                  We build robust, user-friendly web and mobile applications
+                  that solve real business problems. From customer-facing
+                  platforms to internal management systems, our development team
+                  creates solutions that are secure, scalable, and designed to
+                  grow with your business.
                 </p>
                 <p className="leading-relaxed text-muted-foreground">
-                  Using modern frameworks and best practices, we deliver applications that perform exceptionally well
-                  even in challenging network conditions—a critical consideration for Sierra Leone's digital landscape.
+                  Using modern frameworks and best practices, we deliver
+                  applications that perform exceptionally well even in
+                  challenging network conditions—a critical consideration for
+                  Sierra Leone's digital landscape.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 pt-4">
@@ -134,8 +162,10 @@ export default function ServicesPage() {
                   <div className="space-y-3">
                     <h4 className="font-semibold">Ideal For</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Businesses needing custom software solutions, e-commerce capabilities, or mobile presence. Perfect
-                      for companies outgrowing off-the-shelf solutions or requiring specialized functionality.
+                      Businesses needing custom software solutions, e-commerce
+                      capabilities, or mobile presence. Perfect for companies
+                      outgrowing off-the-shelf solutions or requiring
+                      specialized functionality.
                     </p>
                     <Link href="/contact">
                       <Button className="mt-4 bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -157,20 +187,27 @@ export default function ServicesPage() {
                     <Zap className="h-7 w-7 text-primary-foreground" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl md:text-3xl">Workflow Automation</CardTitle>
-                    <p className="text-muted-foreground mt-1">Eliminate manual processes and boost efficiency.</p>
+                    <CardTitle className="text-2xl md:text-3xl">
+                      Workflow Automation
+                    </CardTitle>
+                    <p className="text-muted-foreground mt-1">
+                      Eliminate manual processes and boost efficiency.
+                    </p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-8 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  Manual, repetitive tasks drain your team's time and introduce errors. Our workflow automation services
-                  identify bottlenecks in your operations and implement intelligent automation that frees your team to
-                  focus on high-value work.
+                  Manual, repetitive tasks drain your team's time and introduce
+                  errors. Our workflow automation services identify bottlenecks
+                  in your operations and implement intelligent automation that
+                  frees your team to focus on high-value work.
                 </p>
                 <p className="leading-relaxed text-muted-foreground">
-                  From automated reporting and data synchronization to intelligent document processing and approval
-                  workflows, we create systems that work seamlessly in the background, improving accuracy and speed.
+                  From automated reporting and data synchronization to
+                  intelligent document processing and approval workflows, we
+                  create systems that work seamlessly in the background,
+                  improving accuracy and speed.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 pt-4">
@@ -192,8 +229,10 @@ export default function ServicesPage() {
                   <div className="space-y-3">
                     <h4 className="font-semibold">Ideal For</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Organizations with repetitive manual processes, data entry bottlenecks, or disconnected systems.
-                      Perfect for businesses seeking to scale operations without proportionally increasing headcount.
+                      Organizations with repetitive manual processes, data entry
+                      bottlenecks, or disconnected systems. Perfect for
+                      businesses seeking to scale operations without
+                      proportionally increasing headcount.
                     </p>
                     <Link href="/contact">
                       <Button className="mt-4 bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -215,21 +254,28 @@ export default function ServicesPage() {
                     <Wrench className="h-7 w-7 text-primary-foreground" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl md:text-3xl">Maintenance & Support</CardTitle>
-                    <p className="text-muted-foreground mt-1">Proactive care for your technology investments.</p>
+                    <CardTitle className="text-2xl md:text-3xl">
+                      Maintenance & Support
+                    </CardTitle>
+                    <p className="text-muted-foreground mt-1">
+                      Proactive care for your technology investments.
+                    </p>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="p-8 space-y-6">
                 <p className="text-lg leading-relaxed">
-                  Technology requires ongoing attention to remain secure, performant, and aligned with your evolving
-                  needs. Our maintenance and support services provide peace of mind with proactive monitoring, regular
-                  updates, and rapid response to issues.
+                  Technology requires ongoing attention to remain secure,
+                  performant, and aligned with your evolving needs. Our
+                  maintenance and support services provide peace of mind with
+                  proactive monitoring, regular updates, and rapid response to
+                  issues.
                 </p>
                 <p className="leading-relaxed text-muted-foreground">
-                  We don't just fix problems—we prevent them. Our team continuously optimizes your systems, implements
-                  security patches, and provides strategic recommendations to ensure your technology continues to
-                  deliver value.
+                  We don't just fix problems—we prevent them. Our team
+                  continuously optimizes your systems, implements security
+                  patches, and provides strategic recommendations to ensure your
+                  technology continues to deliver value.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 pt-4">
@@ -251,8 +297,10 @@ export default function ServicesPage() {
                   <div className="space-y-3">
                     <h4 className="font-semibold">Ideal For</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Any business relying on technology for operations. Essential for companies without in-house IT
-                      teams or those seeking expert-level support and proactive system management.
+                      Any business relying on technology for operations.
+                      Essential for companies without in-house IT teams or those
+                      seeking expert-level support and proactive system
+                      management.
                     </p>
                     <Link href="/contact">
                       <Button className="mt-4 bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -271,7 +319,9 @@ export default function ServicesPage() {
       <section className="py-20 md:py-28 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Enhance Your Solution</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+              Enhance Your Solution
+            </h2>
             <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
               Modular add-ons to extend your core services and maximize value.
             </p>
@@ -281,9 +331,12 @@ export default function ServicesPage() {
             <Card>
               <CardContent className="p-6 space-y-4">
                 <Users className="h-10 w-10 text-accent" />
-                <h3 className="text-lg font-semibold">CRM Setup & Integration</h3>
+                <h3 className="text-lg font-semibold">
+                  CRM Setup & Integration
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Manage customer relationships effectively with customized CRM solutions.
+                  Manage customer relationships effectively with customized CRM
+                  solutions.
                 </p>
               </CardContent>
             </Card>
@@ -293,7 +346,8 @@ export default function ServicesPage() {
                 <Smartphone className="h-10 w-10 text-accent" />
                 <h3 className="text-lg font-semibold">Client Portals</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Secure, branded portals for customer self-service and engagement.
+                  Secure, branded portals for customer self-service and
+                  engagement.
                 </p>
               </CardContent>
             </Card>
@@ -303,7 +357,8 @@ export default function ServicesPage() {
                 <Database className="h-10 w-10 text-accent" />
                 <h3 className="text-lg font-semibold">Data Analytics</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Transform data into actionable insights with custom dashboards.
+                  Transform data into actionable insights with custom
+                  dashboards.
                 </p>
               </CardContent>
             </Card>
@@ -325,12 +380,18 @@ export default function ServicesPage() {
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance">Not Sure Which Service You Need?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-balance">
+              Not Sure Which Service You Need?
+            </h2>
             <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-              Schedule a free consultation and we'll help you identify the right solutions for your business goals.
+              Schedule a free consultation and we'll help you identify the right
+              solutions for your business goals.
             </p>
             <Link href="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              >
                 Schedule Free Consultation
               </Button>
             </Link>
@@ -338,5 +399,5 @@ export default function ServicesPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

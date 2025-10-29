@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { CheckCircle2 } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle2 } from "lucide-react";
 
 const caseStudies = [
   {
@@ -12,7 +12,8 @@ const caseStudies = [
     title: "Agribusiness Supply Chain Platform",
     industry: "Agriculture",
     services: ["Workflow Automation", "Web Development"],
-    challenge: "Manual order processing and inventory tracking led to errors and delays, limiting growth potential.",
+    challenge:
+      "Manual order processing and inventory tracking led to errors and delays, limiting growth potential.",
     solution:
       "Custom web platform with automated workflows, real-time inventory management, and mobile-friendly interface.",
     results: [
@@ -30,7 +31,8 @@ const caseStudies = [
     services: ["Web Development", "Digital Strategy"],
     challenge:
       "Customers required in-person visits for routine transactions, creating bottlenecks and limiting service hours.",
-    solution: "Secure customer portal with account management, transaction history, and digital document submission.",
+    solution:
+      "Secure customer portal with account management, transaction history, and digital document submission.",
     results: [
       "60% reduction in branch visits",
       "24/7 customer self-service capability",
@@ -61,8 +63,10 @@ const caseStudies = [
     title: "Retail Inventory & POS System",
     industry: "Retail",
     services: ["Web Development", "Workflow Automation"],
-    challenge: "Paper-based inventory and manual sales tracking led to stock discrepancies and lost revenue.",
-    solution: "Cloud-based POS system with inventory management, sales analytics, and multi-location support.",
+    challenge:
+      "Paper-based inventory and manual sales tracking led to stock discrepancies and lost revenue.",
+    solution:
+      "Cloud-based POS system with inventory management, sales analytics, and multi-location support.",
     results: [
       "Eliminated stock discrepancies",
       "Real-time sales data across 3 locations",
@@ -76,8 +80,10 @@ const caseStudies = [
     title: "Import/Export Documentation System",
     industry: "Import/Export",
     services: ["Workflow Automation", "Digital Strategy"],
-    challenge: "Complex customs documentation process with multiple stakeholders caused delays and compliance risks.",
-    solution: "Automated document generation and approval workflow with digital signatures and audit trails.",
+    challenge:
+      "Complex customs documentation process with multiple stakeholders caused delays and compliance risks.",
+    solution:
+      "Automated document generation and approval workflow with digital signatures and audit trails.",
     results: [
       "50% faster customs clearance",
       "Zero compliance violations in 12 months",
@@ -91,8 +97,10 @@ const caseStudies = [
     title: "Healthcare Appointment System",
     industry: "Healthcare",
     services: ["Web Development", "Maintenance"],
-    challenge: "Phone-based appointment scheduling led to double bookings and long wait times for patients.",
-    solution: "Online appointment booking system with SMS reminders, patient records, and staff scheduling.",
+    challenge:
+      "Phone-based appointment scheduling led to double bookings and long wait times for patients.",
+    solution:
+      "Online appointment booking system with SMS reminders, patient records, and staff scheduling.",
     results: [
       "70% of appointments now booked online",
       "40% reduction in no-shows",
@@ -101,20 +109,36 @@ const caseStudies = [
     ],
     image: "/healthcare-appointment-booking-interface.jpg",
   },
-]
+];
 
-const industries = ["All", "Agriculture", "Banking", "NGO", "Retail", "Import/Export", "Healthcare"]
-const serviceTypes = ["All", "Digital Strategy", "Web Development", "Workflow Automation", "Maintenance"]
+const industries = [
+  "All",
+  "Agriculture",
+  "Banking",
+  "NGO",
+  "Retail",
+  "Import/Export",
+  "Healthcare",
+];
+const serviceTypes = [
+  "All",
+  "Digital Strategy",
+  "Web Development",
+  "Workflow Automation",
+  "Maintenance",
+];
 
 export default function WorkPage() {
-  const [selectedIndustry, setSelectedIndustry] = useState("All")
-  const [selectedService, setSelectedService] = useState("All")
+  const [selectedIndustry, setSelectedIndustry] = useState("All");
+  const [selectedService, setSelectedService] = useState("All");
 
   const filteredCaseStudies = caseStudies.filter((study) => {
-    const industryMatch = selectedIndustry === "All" || study.industry === selectedIndustry
-    const serviceMatch = selectedService === "All" || study.services.includes(selectedService)
-    return industryMatch && serviceMatch
-  })
+    const industryMatch =
+      selectedIndustry === "All" || study.industry === selectedIndustry;
+    const serviceMatch =
+      selectedService === "All" || study.services.includes(selectedService);
+    return industryMatch && serviceMatch;
+  });
 
   return (
     <main>
@@ -134,7 +158,8 @@ export default function WorkPage() {
               Our Work & Results
             </h1>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_30%)]">
-              Real projects, measurable outcomes, and lasting partnerships with Sierra Leonean businesses.
+              Real projects, measurable outcomes, and lasting partnerships with
+              Sierra Leonean businesses.
             </p>
           </div>
         </div>
@@ -150,10 +175,14 @@ export default function WorkPage() {
                 {industries.map((industry) => (
                   <Button
                     key={industry}
-                    variant={selectedIndustry === industry ? "default" : "outline"}
+                    variant={
+                      selectedIndustry === industry ? "default" : "outline"
+                    }
                     size="sm"
                     onClick={() => setSelectedIndustry(industry)}
-                    className={selectedIndustry === industry ? "bg-primary" : ""}
+                    className={
+                      selectedIndustry === industry ? "bg-primary" : ""
+                    }
                   >
                     {industry}
                   </Button>
@@ -166,10 +195,16 @@ export default function WorkPage() {
                 {serviceTypes.map((service) => (
                   <Button
                     key={service}
-                    variant={selectedService === service ? "default" : "outline"}
+                    variant={
+                      selectedService === service ? "default" : "outline"
+                    }
                     size="sm"
                     onClick={() => setSelectedService(service)}
-                    className={selectedService === service ? "bg-accent text-accent-foreground" : ""}
+                    className={
+                      selectedService === service
+                        ? "bg-accent text-accent-foreground"
+                        : ""
+                    }
                   >
                     {service}
                   </Button>
@@ -185,7 +220,10 @@ export default function WorkPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {filteredCaseStudies.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">No case studies match your filters. Try adjusting your selection.</p>
+              <p className="text-muted-foreground">
+                No case studies match your filters. Try adjusting your
+                selection.
+              </p>
             </div>
           ) : (
             <div className="space-y-12">
@@ -204,12 +242,17 @@ export default function WorkPage() {
                         <div className="flex flex-wrap gap-2">
                           <Badge variant="secondary">{study.industry}</Badge>
                           {study.services.map((service) => (
-                            <Badge key={service} className="bg-accent/10 text-accent hover:bg-accent/20">
+                            <Badge
+                              key={service}
+                              className="bg-accent/10 text-accent hover:bg-accent/20"
+                            >
                               {service}
                             </Badge>
                           ))}
                         </div>
-                        <h2 className="text-2xl md:text-3xl font-bold text-balance">{study.title}</h2>
+                        <h2 className="text-2xl md:text-3xl font-bold text-balance">
+                          {study.title}
+                        </h2>
                       </div>
 
                       <div className="space-y-4">
@@ -217,14 +260,18 @@ export default function WorkPage() {
                           <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-2">
                             The Challenge
                           </h3>
-                          <p className="text-sm leading-relaxed">{study.challenge}</p>
+                          <p className="text-sm leading-relaxed">
+                            {study.challenge}
+                          </p>
                         </div>
 
                         <div>
                           <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider mb-2">
                             Our Solution
                           </h3>
-                          <p className="text-sm leading-relaxed">{study.solution}</p>
+                          <p className="text-sm leading-relaxed">
+                            {study.solution}
+                          </p>
                         </div>
 
                         <div>
@@ -233,7 +280,10 @@ export default function WorkPage() {
                           </h3>
                           <ul className="grid sm:grid-cols-2 gap-2">
                             {study.results.map((result, index) => (
-                              <li key={index} className="flex items-start gap-2">
+                              <li
+                                key={index}
+                                className="flex items-start gap-2"
+                              >
                                 <CheckCircle2 className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
                                 <span className="text-sm">{result}</span>
                               </li>
@@ -266,14 +316,19 @@ export default function WorkPage() {
               Ready to Write Your Success Story?
             </h2>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_30%)]">
-              Let's discuss how we can help you achieve similar results for your business.
+              Let's discuss how we can help you achieve similar results for your
+              business.
             </p>
-            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" asChild>
+            <Button
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              asChild
+            >
               <a href="/contact">Start Your Project</a>
             </Button>
           </div>
         </div>
       </section>
     </main>
-  )
+  );
 }

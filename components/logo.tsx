@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 
-export function Logo({
+export default function Logo({
   className = "",
   showText = true,
 }: {

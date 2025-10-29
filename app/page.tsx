@@ -1,7 +1,14 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, Lightbulb, Code, Zap, Wrench, CheckCircle2 } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ArrowRight,
+  Lightbulb,
+  Code,
+  Zap,
+  Wrench,
+  CheckCircle2,
+} from "lucide-react";
 
 export default function HomePage() {
   return (
@@ -22,11 +29,16 @@ export default function HomePage() {
               Adapting Your Business for What's Next
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 text-pretty leading-relaxed drop-shadow-md">
-              We provide the strategy, development, and support to power your business growth.
+              We provide the strategy, development, and support to power your
+              business growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/services">
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="w-full sm:w-auto"
+                >
                   View Our Services
                 </Button>
               </Link>
@@ -40,7 +52,10 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
+                >
                   Get a Consultation
                 </Button>
               </Link>
@@ -56,11 +71,19 @@ export default function HomePage() {
             Partnering with leading Sierra Leonean businesses
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60">
-            <div className="text-2xl font-bold text-muted-foreground">Banking</div>
-            <div className="text-2xl font-bold text-muted-foreground">Agriculture</div>
+            <div className="text-2xl font-bold text-muted-foreground">
+              Banking
+            </div>
+            <div className="text-2xl font-bold text-muted-foreground">
+              Agriculture
+            </div>
             <div className="text-2xl font-bold text-muted-foreground">NGOs</div>
-            <div className="text-2xl font-bold text-muted-foreground">Retail</div>
-            <div className="text-2xl font-bold text-muted-foreground">Import/Export</div>
+            <div className="text-2xl font-bold text-muted-foreground">
+              Retail
+            </div>
+            <div className="text-2xl font-bold text-muted-foreground">
+              Import/Export
+            </div>
           </div>
         </div>
       </section>
@@ -69,9 +92,12 @@ export default function HomePage() {
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Strategic Technology Solutions</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+              Strategic Technology Solutions
+            </h2>
             <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
-              We're not just developers; we're strategic partners providing end-to-end solutions.
+              We're not just developers; we're strategic partners providing
+              end-to-end solutions.
             </p>
           </div>
 
@@ -82,9 +108,12 @@ export default function HomePage() {
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <Lightbulb className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
                   </div>
-                  <h3 className="text-xl font-semibold">Digital Strategy Consulting</h3>
+                  <h3 className="text-xl font-semibold">
+                    Digital Strategy Consulting
+                  </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
-                    Expert guidance for smarter business decisions and technology roadmaps.
+                    Expert guidance for smarter business decisions and
+                    technology roadmaps.
                   </p>
                   <div className="flex items-center text-accent text-sm font-medium">
                     Learn more <ArrowRight className="ml-2 h-4 w-4" />
@@ -99,7 +128,9 @@ export default function HomePage() {
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <Code className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
                   </div>
-                  <h3 className="text-xl font-semibold">Web & App Development</h3>
+                  <h3 className="text-xl font-semibold">
+                    Web & App Development
+                  </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     Custom, scalable solutions built with modern technologies.
                   </p>
@@ -133,7 +164,9 @@ export default function HomePage() {
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                     <Wrench className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
                   </div>
-                  <h3 className="text-xl font-semibold">Maintenance & Support</h3>
+                  <h3 className="text-xl font-semibold">
+                    Maintenance & Support
+                  </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     Proactive monitoring and continuous optimization.
                   </p>
@@ -151,7 +184,9 @@ export default function HomePage() {
       <section className="py-20 md:py-28 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">Our Proven Process</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+              Our Proven Process
+            </h2>
             <p className="text-lg text-muted-foreground text-pretty leading-relaxed">
               A full-service, consultative approach to ensure your success.
             </p>
@@ -220,23 +255,32 @@ export default function HomePage() {
                       Featured Case Study
                     </span>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-balance">Transforming Agribusiness Operations</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold text-balance">
+                    Transforming Agribusiness Operations
+                  </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    We helped a Freetown-based agribusiness increase operational efficiency by 40% through custom
-                    workflow automation and a modern web platform.
+                    We helped a Freetown-based agribusiness increase operational
+                    efficiency by 40% through custom workflow automation and a
+                    modern web platform.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Reduced manual data entry by 15 hours/week</span>
+                      <span className="text-sm">
+                        Reduced manual data entry by 15 hours/week
+                      </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Improved order accuracy to 99%</span>
+                      <span className="text-sm">
+                        Improved order accuracy to 99%
+                      </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">Real-time inventory tracking</span>
+                      <span className="text-sm">
+                        Real-time inventory tracking
+                      </span>
                     </li>
                   </ul>
                   <Link href="/work">
@@ -267,10 +311,14 @@ export default function HomePage() {
               Ready to Transform Your Business?
             </h2>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed drop-shadow-md">
-              Schedule your free strategy session and discover how we can help you achieve your goals.
+              Schedule your free strategy session and discover how we can help
+              you achieve your goals.
             </p>
             <Link href="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+              <Button
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground"
+              >
                 Schedule Your Free Strategy Session
               </Button>
             </Link>
@@ -278,5 +326,5 @@ export default function HomePage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

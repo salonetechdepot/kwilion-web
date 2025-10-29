@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "render-build": "npm rebuild && next build"
-  },
-  "engines": {
-    "node": "20.x"
+    "render-build": "npm ci --include=dev && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
