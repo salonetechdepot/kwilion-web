@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
-    "db:sync": "tsx server/scripts/sync.ts",
-    "predev": "npm run db:sync",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
-    "start": "next start"
+    "render-build": "npm rebuild && next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
