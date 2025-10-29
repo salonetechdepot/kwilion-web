@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Disable lightningcss to fix font issues
+  experimental: {
+    optimizeCss: false,
+  },
+  // Your existing config
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -9,9 +14,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-
-  // Remove Vercel branding
   poweredByHeader: false,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
