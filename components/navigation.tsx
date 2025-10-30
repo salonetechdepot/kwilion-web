@@ -1,12 +1,13 @@
+// components/navigation.tsx
 "use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import Logo from "@/components/logo";
+import { Logo } from "@/components/logo";
 
-export default function Navigation() {
+export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

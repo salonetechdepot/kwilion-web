@@ -1,10 +1,9 @@
-"use client";
-
+// components/footer.tsx
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
-import Logo from "@/components/logo";
+import { Logo } from "@/components/logo";
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">

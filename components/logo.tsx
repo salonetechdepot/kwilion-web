@@ -1,8 +1,7 @@
-"use client";
-
+// components/logo.tsx
 import Image from "next/image";
 
-export default function Logo({
+export function Logo({
   className = "",
   showText = true,
 }: {
@@ -19,6 +18,7 @@ export default function Logo({
         className="h-10 w-auto"
         priority
       />
+      {showText ? null : null}
     </div>
   );
 }

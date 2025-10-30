@@ -1,9 +1,9 @@
-// app/layout.tsx
+import type React from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 import { Suspense } from "react";
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
@@ -34,11 +34,11 @@ export default function RootLayout({
       <body
         className={`font-sans ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Suspense fallback={<div>Loading...</div>}>
-          <Navigation />
-          {children}
-          <Footer />
-        </Suspense>
+        {/* Navigation is a Client Component, layout is a Server Component: this is OK */}
+        <Navigation />
+        {/* Keep Suspense around children if you want, but it’s optional */}
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <Footer />
       </body>
     </html>
   );
