@@ -212,11 +212,14 @@ export default function ContactPage() {
                             <SelectItem value="under5k">
                               Under $5,000
                             </SelectItem>
-                            <SelectItem value="5k-15k">
-                              $5,000 - $15,000
+                            <SelectItem value="5k-10k">
+                              $5,000 - $10,000
                             </SelectItem>
-                            <SelectItem value="15k-30k">
-                              $15,000 - $30,000
+                            <SelectItem value="10k-20k">
+                              $10,000 - $20,000
+                            </SelectItem>
+                            <SelectItem value="20k-30k">
+                              $20,000 - $30,000
                             </SelectItem>
                             <SelectItem value="over30k">
                               Over $30,000
@@ -287,10 +290,10 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold mb-1">Phone</h4>
                       <a
-                        href="tel:+232XXXXXXXX"
+                        href="tel:+23275088075"
                         className="text-sm text-muted-foreground hover:text-accent"
                       >
-                        232 75 088 075
+                        +232 75 088 075 <br /> +1 571 471 6384
                       </a>
                       <p className="text-xs text-muted-foreground mt-1">
                         Mon-Fri, 9am-5pm GMT

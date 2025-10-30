@@ -88,13 +88,19 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/80">
-                  +232 XX XXX XXXX | +1 571 471 6384
+                  +232 75 088 075 <br /> +1 571 471 6384
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/80">
-                  Freetown, Sierra Leone
+                  Herndon, Virginia USA.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <span className="text-primary-foreground/80">
+                  Freetown, Sierra Leone.
                 </span>
               </li>
             </ul>

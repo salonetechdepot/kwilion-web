@@ -223,14 +223,15 @@ export default function AboutPage() {
               <CardContent className="p-8 space-y-4 text-center">
                 <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent"></div>
                 <div>
-                  <h3 className="text-xl font-semibold">Mohamed Kamara</h3>
+                  <h3 className="text-xl font-semibold">Amara T. Jaward</h3>
                   <p className="text-sm text-muted-foreground">
                     Founder & Lead Strategist
                   </p>
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  15+ years in technology consulting with expertise in digital
-                  transformation and business process optimization.
+                  10+ years in technology consulting and application analysis
+                  with expertise in digital transformation and business process
+                  optimization.
                 </p>
               </CardContent>
             </Card>
@@ -239,14 +240,14 @@ export default function AboutPage() {
               <CardContent className="p-8 space-y-4 text-center">
                 <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent"></div>
                 <div>
-                  <h3 className="text-xl font-semibold">Aminata Sesay</h3>
+                  <h3 className="text-xl font-semibold">Sahr Mbayo</h3>
                   <p className="text-sm text-muted-foreground">
                     Head of Development
                   </p>
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Full-stack developer with 10+ years building scalable web and
-                  mobile applications for African markets.
+                  Specializes in system integration and automation with deep
+                  expertise in enterprise architecture.
                 </p>
               </CardContent>
             </Card>
@@ -255,14 +256,14 @@ export default function AboutPage() {
               <CardContent className="p-8 space-y-4 text-center">
                 <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent"></div>
                 <div>
-                  <h3 className="text-xl font-semibold">Ibrahim Conteh</h3>
+                  <h3 className="text-xl font-semibold">Lansana Sawi</h3>
                   <p className="text-sm text-muted-foreground">
                     Solutions Architect
                   </p>
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">
-                  Specializes in system integration and automation with deep
-                  expertise in enterprise architecture.
+                  Full-stack developer focused on building scalable,
+                  user-centric web and mobile applications.
                 </p>
               </CardContent>
             </Card>

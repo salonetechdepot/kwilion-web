@@ -26,7 +26,7 @@ export function Navigation() {
               Home
             </Link>
             <Link
-              href="/service"
+              href="/services"
               className="text-sm font-medium hover:text-primary transition-colors"
             >
               Services
