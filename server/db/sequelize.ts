@@ -70,18 +70,20 @@ export function ensureModels(): Sequelize {
 export async function ensureConnected(): Promise<Sequelize> {
   const s = ensureModels();
   await s.authenticate();
+
   const row = await s.query<{ now: string; db: string; schema: string }>(
     `select now() as "now", current_database() as "db", current_schema() as "schema";`,
     { type: QueryTypes.SELECT, plain: true }
   );
-  // if (process.env.DB_LOGGING === "true") {
-  //   console.log(
-  //     "✅ Connected:",
-  //     row,
-  //     "Models:",
-  //     s.modelManager.all.map((m) => m.name)
-  //   );
-  // }
+
+  if (process.env.DB_LOGGING === "true") {
+    console.log(
+      "✅ Connected:",
+      row,
+      "Models:",
+      s.modelManager.all.map((m) => m.name)
+    );
+  }
   return s;
 }
 
