@@ -7,11 +7,12 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "dev": "next dev",
+    "db:sync": "tsx server/scripts/sync.ts",
+    "predev": "npm run db:sync",
     "lint": "next lint",
-    "render-build": "npm ci --include=dev && npm run build"
+    "start": "next start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
