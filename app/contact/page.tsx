@@ -39,8 +39,6 @@ export default function ContactPage() {
         body: JSON.stringify(formData),
       });
 
-      console.log(res);
-
       const data = await res.json();
       if (!res.ok) {
         console.error("Submit failed:", data?.error);
@@ -48,7 +46,6 @@ export default function ContactPage() {
         return;
       }
 
-      console.log("Saved contact:", data);
       alert("Thank you! We received your inquiry.");
       // Optional: reset form
       setFormData({
