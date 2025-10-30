@@ -4,7 +4,7 @@ import { Sequelize } from "sequelize-typescript";
 import { QueryTypes } from "sequelize";
 import pg from "pg";
 
-// Import models directly (no barrels)
+// Import concrete classes (no barrels)
 import Contact from "@/server/models/Contact.model";
 import User from "@/server/models/User.model";
 
@@ -46,7 +46,7 @@ function createSequelize(): Sequelize {
         ...ssl,
       });
 
-  // Register models on creation
+  // Register models on creation (binds the actual classes)
   s.addModels([User, Contact]);
   return s;
 }
@@ -56,7 +56,7 @@ export default function getSequelize(): Sequelize {
   return g.__sequelize!;
 }
 
-/** Ensure models are attached on this singleton instance (defensive in prod). */
+/** Ensure the models are attached to the singleton (defensive for prod). */
 export function ensureModels(): Sequelize {
   const s = getSequelize();
   const names = s.modelManager.all.map((m) => m.name);
@@ -66,6 +66,7 @@ export function ensureModels(): Sequelize {
   return s;
 }
 
+/** Make sure we’re connected; handy debug logging when DB_LOGGING=true. */
 export async function ensureConnected(): Promise<Sequelize> {
   const s = ensureModels();
   await s.authenticate();
@@ -84,15 +85,8 @@ export async function ensureConnected(): Promise<Sequelize> {
   return s;
 }
 
-/** Helpers to fetch strongly-typed models from THIS instance. */
-export function getContactModel() {
-  const s = ensureModels();
-  return s.models.Contact as typeof Contact;
-}
-export function getUserModel() {
-  const s = ensureModels();
-  return s.models.User as typeof User;
-}
+/** Expose the model classes (optional helpers if you like) */
+export { Contact, User };
 
 export async function syncDatabase(opts?: {
   force?: boolean;
@@ -102,6 +96,8 @@ export async function syncDatabase(opts?: {
   await s.sync({ force: !!opts?.force, alter: !!opts?.alter });
 }
 
+//
+//
 //
 // // server/db/sequelize.ts  (Next server-safe; no "server-only" here)
 // import "reflect-metadata";

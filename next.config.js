@@ -10,6 +10,13 @@ const nextConfig = {
     unoptimized: true,
   },
 
+  serverExternalPackages: [
+    "sequelize",
+    "pg",
+    "pg-hstore",
+    "sequelize-typescript",
+  ],
+
   webpack: (config, { isServer }) => {
     // Avoid noisy dynamic require warning from Sequelize
     config.module.parser = config.module.parser || {};

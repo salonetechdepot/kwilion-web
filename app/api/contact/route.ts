@@ -1,13 +1,12 @@
 // app/api/contact/route.ts
 import "server-only";
-
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
-import { ensureConnected, getContactModel } from "@/server/db/sequelize";
+import { ensureConnected, Contact } from "@/server/db/sequelize";
 
-// Direct imports (avoid barrels to prevent duplicate copies)
+// Avoid barrels to prevent duplicate module copies
 import resend from "@/emails/resend";
 import { ContactAlertEmail, ContactConfirmationEmail } from "@/emails";
 
@@ -49,10 +48,10 @@ export async function POST(req: Request) {
       }
     }
 
-    // ⛑️ Guarantees connection + model registration on THIS instance
+    // ⛑️ Guarantees a live connection and model registration
     await ensureConnected();
-    const Contact = getContactModel();
 
+    // ✅ Use the bound class directly (no sequelize.models lookup)
     const row = await Contact.create({
       name: body.name!,
       company: body.company!,
@@ -152,6 +151,8 @@ export async function GET() {
   return NextResponse.json({ ok: true });
 }
 
+//
+//
 // // app/api/contact/route.ts
 
 // // example: app/api/contact/route.ts
