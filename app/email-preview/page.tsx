@@ -56,6 +56,7 @@ export default function EmailPreviewPage() {
               key="confirmation"
               name={sampleData.name}
               email={sampleData.email}
+              phone={sampleData.phone}
               company={sampleData.company}
               message={sampleData.message}
             />

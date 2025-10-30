@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
-import { useState } from "react"
-import { Logo } from "@/components/logo"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { Logo } from "@/components/logo";
 
 export function Navigation() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
@@ -19,26 +19,48 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              href="/"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               Home
             </Link>
-            <Link href="/services" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              href="/service"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               Services
             </Link>
-            <Link href="/work" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              href="/work"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               Our Work
             </Link>
-            <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link
+              href="/about"
+              className="text-sm font-medium hover:text-primary transition-colors"
+            >
               About Us
             </Link>
             <Link href="/contact">
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">Get Started</Button>
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                Get Started
+              </Button>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label="Toggle menu">
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
 
@@ -74,11 +96,13 @@ export function Navigation() {
               About Us
             </Link>
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-              <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">Get Started</Button>
+              <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                Get Started
+              </Button>
             </Link>
           </div>
         )}
       </div>
     </nav>
-  )
+  );
 }

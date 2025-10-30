@@ -33,7 +33,7 @@ export default function HomePage() {
               business growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/services">
+              <Link href="/service">
                 <Button
                   size="lg"
                   variant="secondary"
