@@ -1,6 +1,8 @@
 // server/db/sequelize.ts
 // server/db/sequelize.ts (example)
+// server/db/sequelize.ts
 import "server-only";
+
 import "reflect-metadata";
 import { Sequelize } from "sequelize-typescript";
 import pg from "pg";

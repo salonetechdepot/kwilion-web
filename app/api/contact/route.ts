@@ -1,5 +1,10 @@
 // app/api/contact/route.ts
-export const runtime = "nodejs";
+
+// example: app/api/contact/route.ts
+import "server-only"; // makes it clear this file is server-only
+
+export const runtime = "nodejs"; // ✅ ensure Node.js runtime, not Edge
+export const dynamic = "force-dynamic"; // ✅ never statically pre-render
 
 import { NextResponse } from "next/server";
 import getSequelize from "@/server/db/sequelize";
