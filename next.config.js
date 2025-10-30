@@ -1,19 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    // Disable Lightning CSS (avoids lightningcss native binary on Render)
-    optimizeCss: false,
+  eslint: {
+    ignoreDuringBuilds: true,
   },
-  serverExternalPackages: ["sequelize", "pg", "pg-hstore"],
-
-  // Optional: hush dev warning for LAN access
-  allowedDevOrigins: ["http://192.168.12.139:3000"],
-
-  images: { unoptimized: true },
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
-  poweredByHeader: false,
-  devIndicators: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

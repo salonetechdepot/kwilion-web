@@ -1,4 +1,3 @@
-// components/footer.tsx
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Logo } from "@/components/logo";
@@ -11,7 +10,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="space-y-4">
             <Logo />
-            <h3 className="font-bold text-lg">Kwilion Solutions</h3>
+            <h3 className="font-bold text-lg">Kwilion</h3>
             <p className="text-sm text-primary-foreground/80 leading-relaxed">
               Adapting your business for what's next through strategic
               technology solutions.
@@ -89,7 +88,7 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/80">
-                  +232 75 088 079 <br /> 001 571 471 6384
+                  +232 XX XXX XXXX | +1 571 471 6384
                 </span>
               </li>
               <li className="flex items-start gap-2">

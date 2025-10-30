@@ -58,7 +58,7 @@ export function ContactConfirmationEmail({
         <p>Hi {name},</p>
 
         <p>
-          We have received your message and appreciate you taking the time to
+          We've received your message and appreciate you taking the time to
           contact us. Our team at Kwilion Solutions will review your inquiry and
           get back to you within 24-48 hours.
         </p>

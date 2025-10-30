@@ -290,7 +290,7 @@ export default function ContactPage() {
                         href="tel:+232XXXXXXXX"
                         className="text-sm text-muted-foreground hover:text-accent"
                       >
-                        +232 75 088 079 <br /> 001 571 471 6384
+                        232 XX XXX XXXX | +1 571 471 6384
                       </a>
                       <p className="text-xs text-muted-foreground mt-1">
                         Mon-Fri, 9am-5pm GMT
