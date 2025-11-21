@@ -1,5 +1,6 @@
 // app/layout.tsx
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 
 import type React from "react";
 import type { Metadata } from "next";
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Suspense fallback={<div>Loading...</div>}>
           <Navigation />
           {children}
+          <Toaster position="top-right" />
           <Footer />
         </Suspense>
       </body>
