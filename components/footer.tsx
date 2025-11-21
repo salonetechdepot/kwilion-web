@@ -53,6 +53,19 @@ export function Footer() {
                   Contact
                 </Link>
               </li>
+              {/* <li>
+                <a
+                  href={
+                    process.env.NEXT_PUBLIC_SURVEY_APP_URL ||
+                    "https://your-survey-app.com"
+                  }
+                  className="hover:text-accent transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Surveys
+                </a>
+              </li> */}
             </ul>
           </div>
 
