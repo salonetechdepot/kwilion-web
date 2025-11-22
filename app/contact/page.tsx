@@ -43,7 +43,6 @@ export default function ContactPage() {
 
       const data = await res.json();
 
-      // Check both the response status AND the success flag
       if (!res.ok || !data.success) {
         console.error("Submit failed:", data?.error);
         toast.error(data?.error ?? "Submission failed. Please try again.");
