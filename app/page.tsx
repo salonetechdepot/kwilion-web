@@ -26,7 +26,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance drop-shadow-lg">
-              Adapting Your Business for What's Next
+              Engineering your digital future.
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 text-pretty leading-relaxed drop-shadow-md">
               We provide the strategy, development, and support to power your

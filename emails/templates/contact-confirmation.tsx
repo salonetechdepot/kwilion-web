@@ -39,7 +39,7 @@ export function ContactConfirmationEmail({
           Kwilion
         </div>
         <div style={{ fontSize: "14px", opacity: 0.9 }}>
-          Adapting your business for what's next
+          Engineering your digital future.
         </div>
       </div>
 
