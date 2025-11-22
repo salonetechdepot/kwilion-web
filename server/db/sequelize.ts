@@ -1,4 +1,3 @@
-// server/db/sequelize.ts
 import "reflect-metadata";
 import { Sequelize } from "sequelize-typescript";
 import { QueryTypes } from "sequelize";
@@ -27,6 +26,12 @@ function createSequelize(): Sequelize {
       process.env.NODE_ENV === "development"
         ? console.log
         : false,
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
   };
 
   const url = process.env.DATABASE_URL;
@@ -52,7 +57,9 @@ function createSequelize(): Sequelize {
 }
 
 export default function getSequelize(): Sequelize {
-  if (!g.__sequelize) g.__sequelize = createSequelize();
+  if (!g.__sequelize) {
+    g.__sequelize = createSequelize();
+  }
   return g.__sequelize!;
 }
 
@@ -60,30 +67,29 @@ export default function getSequelize(): Sequelize {
 export function ensureModels(): Sequelize {
   const s = getSequelize();
   const names = s.modelManager.all.map((m) => m.name);
+
+  // Force re-add models if they're missing (common in production)
   if (!names.includes("User") || !names.includes("Contact")) {
+    console.log("🔄 Re-registering models in production...");
     s.addModels([User, Contact]);
   }
+
   return s;
 }
 
-/** Make sure we’re connected; handy debug logging when DB_LOGGING=true. */
+/** Make sure we're connected; handy debug logging when DB_LOGGING=true. */
 export async function ensureConnected(): Promise<Sequelize> {
   const s = ensureModels();
   await s.authenticate();
 
-  const row = await s.query<{ now: string; db: string; schema: string }>(
-    `select now() as "now", current_database() as "db", current_schema() as "schema";`,
-    { type: QueryTypes.SELECT, plain: true }
-  );
-
-  if (process.env.DB_LOGGING === "true") {
+  // Log available models for debugging
+  if (process.env.NODE_ENV === "production") {
     console.log(
-      "✅ Connected:",
-      row,
-      "Models:",
+      "📊 Production models:",
       s.modelManager.all.map((m) => m.name)
     );
   }
+
   return s;
 }
 

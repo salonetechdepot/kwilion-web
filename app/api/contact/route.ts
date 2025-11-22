@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { ensureConnected } from "@/server/db/sequelize";
 
 export async function POST(request: NextRequest) {
+  console.log("📨 Contact form submission received in production");
+
   try {
     const body = await request.json();
 
@@ -15,7 +17,7 @@ export async function POST(request: NextRequest) {
       "budget",
       "message",
     ];
-    const missing = required.filter((field) => !body[field]);
+    const missing = required.filter((field) => !body[field]?.trim());
 
     if (missing.length > 0) {
       return NextResponse.json(
@@ -24,39 +26,71 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Ensure database connection and get the initialized Sequelize instance
+    // Ensure database connection with production debugging
+    console.log("🔗 Connecting to production database...");
     const sequelize = await ensureConnected();
 
-    // Get the Contact model that's properly bound to the Sequelize instance
-    const Contact = sequelize.model("Contact");
+    // Production-specific model check
+    const modelNames = sequelize.modelManager.all.map((m) => m.name);
+    console.log("📊 Production models available:", modelNames);
 
-    // Create contact entry using the bound model
+    if (!modelNames.includes("Contact")) {
+      // Try to force re-register models
+      console.log("🔄 Contact model missing, attempting to re-register...");
+      const { Contact } = await import("@/server/models/Contact.model");
+      sequelize.addModels([Contact]);
+
+      // Check again
+      const updatedModels = sequelize.modelManager.all.map((m) => m.name);
+      console.log("📊 Models after re-registration:", updatedModels);
+
+      if (!updatedModels.includes("Contact")) {
+        throw new Error("Contact model could not be registered in production");
+      }
+    }
+
+    // Get the Contact model
+    const Contact = sequelize.model("Contact");
+    console.log("✅ Contact model found in production");
+
+    // Create contact entry
     const contact = await Contact.create({
-      name: body.name,
-      company: body.company,
-      email: body.email,
-      phone: body.phone,
+      name: body.name.trim(),
+      company: body.company.trim(),
+      email: body.email.trim(),
+      phone: body.phone.trim(),
       service: body.service,
       budget: body.budget,
-      message: body.message,
+      message: body.message.trim(),
     });
 
-    console.log("Contact created:", contact.get("id"));
+    const contactId = contact.get("id");
+    console.log("✅ Production contact created, ID:", contactId);
 
     return NextResponse.json(
-      { message: "Contact form submitted successfully", id: contact.get("id") },
+      {
+        message: "Contact form submitted successfully",
+        id: contactId,
+      },
       { status: 201 }
     );
   } catch (error) {
-    console.error("POST /api/contact failed", error);
+    console.error("❌ Production POST /api/contact failed:", error);
 
-    // More specific error handling
+    // More detailed production logging
     if (error instanceof Error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error("Production error details:", {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      });
     }
 
     return NextResponse.json(
-      { error: "Internal server error" },
+      {
+        error:
+          "Failed to submit contact form. Please try again or contact us directly at info@kwilion.com",
+      },
       { status: 500 }
     );
   }
