@@ -42,15 +42,17 @@ export default function ContactPage() {
       });
 
       const data = await res.json();
-      if (!res.ok) {
+
+      // Check both the response status AND the success flag
+      if (!res.ok || !data.success) {
         console.error("Submit failed:", data?.error);
         toast.error(data?.error ?? "Submission failed. Please try again.");
         return;
       }
 
-      // Success toast
+      // Success case
       toast.success(
-        "Thank you! We received your inquiry and someoine will be contacting you as soon as possible."
+        "Thank you! We received your inquiry and someone will be contacting you as soon as possible."
       );
 
       // Reset form
