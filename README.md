@@ -1,4 +1,4 @@
-# Kwilion
+# Roar Byte
 
 _Automatically synced with your [v0.app](https://v0.app) deployments_
 
@@ -7,7 +7,7 @@ _Automatically synced with your [v0.app](https://v0.app) deployments_
 
 ## Overview
 
-Kwilion - Adapting your business for what's next through strategic technology solutions.
+Roar Byte - Adapting your business for what's next through strategic technology solutions.
 
 This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
 Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).

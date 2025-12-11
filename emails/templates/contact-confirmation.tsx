@@ -36,7 +36,7 @@ export function ContactConfirmationEmail({
         <div
           style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "10px" }}
         >
-          Kwilion
+          Roar Byte
         </div>
         <div style={{ fontSize: "14px", opacity: 0.9 }}>
           Engineering your digital future.
@@ -59,8 +59,8 @@ export function ContactConfirmationEmail({
 
         <p>
           We've received your message and appreciate you taking the time to
-          contact us. Our team at Kwilion Solutions will review your inquiry and
-          get back to you within 24-48 hours.
+          contact us. Our team at Roar Byte Solutions will review your inquiry
+          and get back to you within 24-48 hours.
         </p>
 
         <div
@@ -96,7 +96,7 @@ export function ContactConfirmationEmail({
 
         <div style={{ textAlign: "center" }}>
           <a
-            href="https://kwilion.com/services"
+            href="https://roarbyte.com/services"
             style={{
               display: "inline-block",
               background: "#f97316",
@@ -115,8 +115,8 @@ export function ContactConfirmationEmail({
         <p>
           If you have any urgent questions, please don't hesitate to reach out
           directly at{" "}
-          <a href="mailto:info@kwilion.com" style={{ color: "#f97316" }}>
-            info@kwilion.com
+          <a href="mailto:info@roarbyte.com" style={{ color: "#f97316" }}>
+            info@roarbyte.com
           </a>
           .
         </p>
@@ -124,7 +124,7 @@ export function ContactConfirmationEmail({
         <p>
           Best regards,
           <br />
-          <strong>The Kwilion Team</strong>
+          <strong>The Roar Byte Team</strong>
         </p>
       </div>
 
@@ -141,16 +141,16 @@ export function ContactConfirmationEmail({
         }}
       >
         <p>
-          <strong>Kwilion</strong>
+          <strong>Roar Byte</strong>
           <br />
           Freetown, Sierra Leone
           <br />
-          <a href="mailto:info@kwilion.com" style={{ color: "#f97316" }}>
-            info@kwilion.com
+          <a href="mailto:info@roarbyte.com" style={{ color: "#f97316" }}>
+            info@roarbyte.com
           </a>
         </p>
         <p style={{ marginTop: "15px", fontSize: "12px" }}>
-          © {new Date().getFullYear()} Kwilion. All rights reserved.
+          © {new Date().getFullYear()} Roar Byte. All rights reserved.
         </p>
       </div>
     </div>

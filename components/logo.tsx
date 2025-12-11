@@ -10,13 +10,14 @@ export function Logo({
   return (
     <div className={`flex items-center ${className}`}>
       <Image
-        src="/kwilion-logo.png"
-        alt="Kwilion"
+        src="/roarbyte-logo.png"
+        alt="Roar Byte Company Logo"
         width={160}
         height={160}
-        className="h-10 w-auto"
+        className="h-14 w-auto"
         priority
       />
+      <h1 className="text-xl">RoarByte</h1>
     </div>
   );
 }

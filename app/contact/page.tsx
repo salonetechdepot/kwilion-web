@@ -291,10 +291,10 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-semibold mb-1">Email</h4>
                       <a
-                        href="mailto:info@kwilion.com"
+                        href="mailto:info@roarbyte.com"
                         className="text-sm text-muted-foreground hover:text-accent"
                       >
-                        info@kwilion.com
+                        info@roarbyte.com
                       </a>
                     </div>
                   </div>

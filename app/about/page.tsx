@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 z-0">
           <img
             src="/diverse-technology-team-collaboration-workspace.jpg"
-            alt="About Kwilion"
+            alt="About Roar Byte"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/60 to-secondary/50" />
@@ -19,7 +19,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-5xl font-bold text-balance [text-shadow:_0_2px_10px_rgb(0_0_0_/_40%)]">
-              About Kwilion
+              About Roar Byte
             </h1>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_30%)]">
               Empowering Sierra Leonean businesses through strategic technology
@@ -40,7 +40,7 @@ export default function AboutPage() {
             </div>
             <div className="prose prose-lg max-w-none space-y-6">
               <p className="text-lg leading-relaxed">
-                Kwilion was founded with a clear vision: to bridge the gap
+                Roar Byte was founded with a clear vision: to bridge the gap
                 between business ambition and technological capability in Sierra
                 Leone. We recognized that many businesses were held back not by
                 lack of vision, but by the absence of strategic technology

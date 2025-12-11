@@ -9,8 +9,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <Logo />
-            <h3 className="font-bold text-lg">Kwilion</h3>
+            <div className="flex items-center ">
+              <Logo />
+              {/* <h2 className="font-bold text-lg">RoarByte</h2> */}
+            </div>
             <p className="text-sm text-primary-foreground/80 leading-relaxed">
               Adapting your business for what's next through strategic
               technology solutions.
@@ -95,7 +97,7 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/80">
-                  info@kwilion.com
+                  info@roarbyte.com
                 </span>
               </li>
               <li className="flex items-start gap-2">
@@ -122,7 +124,8 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center text-sm text-primary-foreground/60">
           <p>
-            &copy; {new Date().getFullYear()} Kwilion Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} Roar Byte Ltd. All rights
+            reserved.
           </p>
         </div>
       </div>

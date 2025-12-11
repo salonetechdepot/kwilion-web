@@ -1,12 +1,12 @@
 interface ContactAlertEmailProps {
-  name: string
-  email: string
-  phone?: string
-  company?: string
-  service?: string
-  budget?: string
-  message: string
-  submittedAt: string
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  service?: string;
+  budget?: string;
+  message: string;
+  submittedAt: string;
 }
 
 export function ContactAlertEmail({
@@ -22,7 +22,8 @@ export function ContactAlertEmail({
   return (
     <div
       style={{
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        fontFamily:
+          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
         lineHeight: "1.6",
         color: "#333",
         maxWidth: "600px",
@@ -32,7 +33,12 @@ export function ContactAlertEmail({
       }}
     >
       <div
-        style={{ background: "white", borderRadius: "8px", overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}
+        style={{
+          background: "white",
+          borderRadius: "8px",
+          overflow: "hidden",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        }}
       >
         <div
           style={{
@@ -57,7 +63,9 @@ export function ContactAlertEmail({
           >
             🔔 New Contact Form Submission
           </div>
-          <h1 style={{ margin: "10px 0 5px 0", fontSize: "24px" }}>New Lead Alert</h1>
+          <h1 style={{ margin: "10px 0 5px 0", fontSize: "24px" }}>
+            New Lead Alert
+          </h1>
           <p style={{ margin: 0, opacity: 0.9, fontSize: "14px" }}>
             Submitted on{" "}
             {new Date(submittedAt).toLocaleString("en-US", {
@@ -68,7 +76,9 @@ export function ContactAlertEmail({
         </div>
 
         <div style={{ padding: "30px" }}>
-          <h2 style={{ color: "#1e3a8a", marginTop: 0 }}>Contact Information</h2>
+          <h2 style={{ color: "#1e3a8a", marginTop: 0 }}>
+            Contact Information
+          </h2>
 
           <div style={{ display: "grid", gap: "15px", margin: "20px 0" }}>
             <div
@@ -167,7 +177,9 @@ export function ContactAlertEmail({
                 >
                   Company
                 </div>
-                <div style={{ color: "#1f2937", fontSize: "15px" }}>{company}</div>
+                <div style={{ color: "#1f2937", fontSize: "15px" }}>
+                  {company}
+                </div>
               </div>
             )}
 
@@ -191,7 +203,9 @@ export function ContactAlertEmail({
                 >
                   Service Interest
                 </div>
-                <div style={{ color: "#1f2937", fontSize: "15px" }}>{service}</div>
+                <div style={{ color: "#1f2937", fontSize: "15px" }}>
+                  {service}
+                </div>
               </div>
             )}
 
@@ -215,7 +229,9 @@ export function ContactAlertEmail({
                 >
                   Budget Range
                 </div>
-                <div style={{ color: "#1f2937", fontSize: "15px" }}>{budget}</div>
+                <div style={{ color: "#1f2937", fontSize: "15px" }}>
+                  {budget}
+                </div>
               </div>
             )}
           </div>
@@ -233,23 +249,25 @@ export function ContactAlertEmail({
             <p style={{ margin: 0, whiteSpace: "pre-wrap" }}>{message}</p>
           </div>
 
-          {budget && (budget.includes("$10,000+") || budget.includes("$5,000")) && (
-            <div
-              style={{
-                background: "#fef2f2",
-                border: "2px solid #dc2626",
-                padding: "15px",
-                borderRadius: "6px",
-                margin: "20px 0",
-                textAlign: "center",
-              }}
-            >
-              <strong>⚡ High-Value Lead</strong>
-              <p style={{ margin: "10px 0 0 0" }}>
-                This prospect has indicated a significant budget. Consider prioritizing this inquiry.
-              </p>
-            </div>
-          )}
+          {budget &&
+            (budget.includes("$10,000+") || budget.includes("$5,000")) && (
+              <div
+                style={{
+                  background: "#fef2f2",
+                  border: "2px solid #dc2626",
+                  padding: "15px",
+                  borderRadius: "6px",
+                  margin: "20px 0",
+                  textAlign: "center",
+                }}
+              >
+                <strong>⚡ High-Value Lead</strong>
+                <p style={{ margin: "10px 0 0 0" }}>
+                  This prospect has indicated a significant budget. Consider
+                  prioritizing this inquiry.
+                </p>
+              </div>
+            )}
 
           <div style={{ textAlign: "center", marginTop: "30px" }}>
             <a
@@ -268,7 +286,7 @@ export function ContactAlertEmail({
               Reply to {name}
             </a>
             <a
-              href={`mailto:${email}?subject=Re: Your Inquiry to Kwilion&body=Hi ${name},%0D%0A%0D%0AThank you for reaching out to Kwilion...`}
+              href={`mailto:${email}?subject=Re: Your Inquiry to RoarByte&body=Hi ${name},%0D%0A%0D%0AThank you for reaching out to Roar Byte...`}
               style={{
                 display: "inline-block",
                 background: "#1e3a8a",
@@ -295,12 +313,13 @@ export function ContactAlertEmail({
           }}
         >
           <p>
-            This is an automated notification from your Kwilion website contact form.
+            This is an automated notification from your Roar Byte website
+            contact form.
             <br />
             Respond promptly to maintain high conversion rates.
           </p>
         </div>
       </div>
     </div>
-  )
+  );
 }

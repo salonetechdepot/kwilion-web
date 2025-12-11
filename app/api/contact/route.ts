@@ -68,7 +68,9 @@ export async function POST(request: NextRequest) {
 
     // EMAIL FUNCTIONALITY (from your original code)
     const canSend = !!process.env.RESEND_API_KEY;
-    const from = process.env.RESEND_FROM || "Kwilion <noreply@kwilion.com>";
+    const from =
+      process.env.RESEND_FROM ||
+      "Roar Byte Tech Solution  <noreply@roarbyte.com>";
     const staffTo = parseList(process.env.RESEND_STAFF_TO);
     const bcc = parseList(process.env.RESEND_BCC);
 
@@ -156,7 +158,7 @@ export async function POST(request: NextRequest) {
       {
         success: false,
         error:
-          "Failed to submit contact form. Please try again or contact us directly at info@kwilion.com",
+          "Failed to submit contact form. Please try again or contact us directly at info@roarbyte.com",
       },
       { status: 500 }
     );

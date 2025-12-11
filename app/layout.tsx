@@ -22,12 +22,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kwilion - Adapting Your Business for What's Next",
+  title: "Roar Byte - Adapting Your Business for What's Next",
   description:
     "Strategic technology consulting, web & app development, workflow automation, and maintenance services. Adapting your business for what's next.",
   generator: "v0.app",
   icons: {
-    icon: "/kwilion-favicon.ico",
+    icon: "/roarbyte-favicon.ico",
   },
 };
 
