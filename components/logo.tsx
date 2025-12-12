@@ -14,7 +14,7 @@ export function Logo({
         alt="Roar Byte Company Logo"
         width={160}
         height={160}
-        className="h-8 w-auto sm:h-10 md:h-12 lg:h-14 bg-primary rounded-full"
+        className="h-6 w-auto sm:h-8 md:h-10 lg:h-12 bg-primary rounded-full"
         priority
       />
     </div>

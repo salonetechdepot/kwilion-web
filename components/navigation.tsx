@@ -22,7 +22,7 @@ export function Navigation({
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
             <Logo />
-            <LogoText className="ml-1 text-primary" showText={showText} />
+            <LogoText className="ml-1 text-accent" showText={showText} />
           </Link>
 
           {/* Desktop Navigation */}

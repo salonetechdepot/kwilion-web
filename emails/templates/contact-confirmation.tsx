@@ -39,7 +39,7 @@ export function ContactConfirmationEmail({
           Roar Byte Technology Solutions
         </div>
         <div style={{ fontSize: "14px", opacity: 0.9 }}>
-          Engineering your digital future.
+          Amplify Your Vision
         </div>
       </div>
 
