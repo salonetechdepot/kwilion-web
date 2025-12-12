@@ -313,11 +313,11 @@ export default function WorkPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h2 className="text-3xl md:text-4xl font-bold text-balance [text-shadow:_0_2px_10px_rgb(0_0_0_/_40%)]">
-              Ready to Write Your Success Story?
+              Ready to transform your Ideas into Echoes?
             </h2>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_30%)]">
-              Let's discuss how we can help you achieve similar results for your
-              business.
+              Let's discuss how we can help you roar to success through
+              intelligent digital solutions.
             </p>
             <Button
               size="lg"

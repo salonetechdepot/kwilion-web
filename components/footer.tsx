@@ -21,7 +21,7 @@ export function Footer({
               <LogoText className="ml-0" showText={showText} />
             </div>
             <p className="text-sm text-primary-foreground/80 leading-relaxed">
-              Adapting your business for what's next through strategic
+              Amplify your vision, from ideas to echos, through strategic
               technology solutions.
             </p>
           </div>

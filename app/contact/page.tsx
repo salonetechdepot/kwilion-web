@@ -89,7 +89,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-5xl font-bold text-balance [text-shadow:_0_2px_10px_rgb(0_0_0_/_40%)]">
-              Let's Build Your Roadmap to Success
+              Amplify Your Vusion. From Idea to Echo.
             </h1>
             <p className="text-xl text-primary-foreground/90 text-pretty leading-relaxed [text-shadow:_0_1px_8px_rgb(0_0_0_/_30%)]">
               Schedule a free consultation to discuss your business goals and
