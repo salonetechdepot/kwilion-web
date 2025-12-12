@@ -40,11 +40,12 @@ export default function AboutPage() {
             </div>
             <div className="prose prose-lg max-w-none space-y-6">
               <p className="text-lg leading-relaxed">
-                Roar Byte was founded with a clear vision: to bridge the gap
-                between business ambition and technological capability in Sierra
-                Leone. We recognized that many businesses were held back not by
-                lack of vision, but by the absence of strategic technology
-                guidance and reliable implementation partners.
+                Roar Byte Technology Solutions was founded with a clear vision:
+                to bridge the gap between business ambition and technological
+                capability in Sierra Leone. We recognized that many businesses
+                were held back not by lack of vision, but by the absence of
+                strategic technology guidance and reliable implementation
+                partners.
               </p>
               <p className="text-lg leading-relaxed">
                 Our name reflects our mission—we help businesses adapt and stay
