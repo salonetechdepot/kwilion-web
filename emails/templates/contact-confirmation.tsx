@@ -36,7 +36,7 @@ export function ContactConfirmationEmail({
         <div
           style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "10px" }}
         >
-          Roar Byte
+          Roar Byte Technology Solutions
         </div>
         <div style={{ fontSize: "14px", opacity: 0.9 }}>
           Engineering your digital future.
@@ -141,7 +141,7 @@ export function ContactConfirmationEmail({
         }}
       >
         <p>
-          <strong>Roar Byte</strong>
+          <strong>Roar Byte Technology Solutions</strong>
           <br />
           Freetown, Sierra Leone
           <br />
@@ -150,7 +150,8 @@ export function ContactConfirmationEmail({
           </a>
         </p>
         <p style={{ marginTop: "15px", fontSize: "12px" }}>
-          © {new Date().getFullYear()} Roar Byte. All rights reserved.
+          © {new Date().getFullYear()} Roar Byte Technology Solutions. All
+          rights reserved.
         </p>
       </div>
     </div>
