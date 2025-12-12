@@ -242,7 +242,7 @@ export default function AboutPage() {
                 <div>
                   <h3 className="text-xl font-semibold">Sahr Mbayo</h3>
                   <p className="text-sm text-muted-foreground">
-                    Head of Development
+                    Solutions Architect
                   </p>
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">
@@ -258,7 +258,7 @@ export default function AboutPage() {
                 <div>
                   <h3 className="text-xl font-semibold">Lansana Sawi</h3>
                   <p className="text-sm text-muted-foreground">
-                    Solutions Architect
+                    Head of Development
                   </p>
                 </div>
                 <p className="text-sm leading-relaxed text-muted-foreground">

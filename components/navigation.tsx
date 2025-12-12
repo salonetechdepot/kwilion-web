@@ -5,8 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/logo";
+import { LogoText } from "./logoText";
 
-export function Navigation() {
+export function Navigation({
+  className = "",
+  showText = true,
+}: {
+  className?: string;
+  showText?: boolean;
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -15,6 +22,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center">
             <Logo />
+            <LogoText className="ml-1 text-primary" showText={showText} />
           </Link>
 
           {/* Desktop Navigation */}

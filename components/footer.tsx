@@ -1,17 +1,24 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { LogoText } from "./logoText";
 
-export function Footer() {
+export function Footer({
+  className = "",
+  showText = true,
+}: {
+  className?: string;
+  showText?: boolean;
+}) {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center ">
+            <div className="flex items-center">
               <Logo />
-              {/* <h2 className="font-bold text-lg">RoarByte</h2> */}
+              <LogoText className="ml-0" showText={showText} />
             </div>
             <p className="text-sm text-primary-foreground/80 leading-relaxed">
               Adapting your business for what's next through strategic
