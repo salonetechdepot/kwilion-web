@@ -59,7 +59,7 @@ export function ContactConfirmationEmail({
 
         <p>
           We have received your message and appreciate you taking the time to
-          contact us. Our team at Roar Byte Tech Solutions will review your
+          contact us. Our team at RoarByte Tech Solutions will review your
           inquiry and get back to you within 24-48 hours.
         </p>
 

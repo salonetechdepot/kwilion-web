@@ -19,6 +19,20 @@ export function ContactAlertEmail({
   message,
   submittedAt,
 }: ContactAlertEmailProps) {
+  const dt = new Date(submittedAt);
+
+  const ny = dt.toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    dateStyle: "full",
+    timeStyle: "short",
+  });
+
+  const freetown = dt.toLocaleString("en-US", {
+    timeZone: "Africa/Freetown",
+    dateStyle: "full",
+    timeStyle: "short",
+  });
+
   return (
     <div
       style={{
@@ -66,12 +80,13 @@ export function ContactAlertEmail({
           <h1 style={{ margin: "10px 0 5px 0", fontSize: "24px" }}>
             New Lead Alert
           </h1>
+
           <p style={{ margin: 0, opacity: 0.9, fontSize: "14px" }}>
-            Submitted on{" "}
-            {new Date(submittedAt).toLocaleString("en-US", {
-              dateStyle: "full",
-              timeStyle: "short",
-            })}
+            Submitted on
+            <br />
+            {freetown} (Freetown)
+            <br />
+            {ny} (New York)
           </p>
         </div>
 
