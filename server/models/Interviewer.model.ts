@@ -7,6 +7,7 @@ import {
   DataType,
   AllowNull,
   Index,
+  Unique,
 } from "sequelize-typescript";
 import { UUIDV4 } from "sequelize";
 import type {
@@ -29,9 +30,9 @@ export default class Interviewer extends Model<
   @Column(DataType.UUID)
   declare id: CreationOptional<string>;
 
-  @AllowNull(false)
-  @Column({ type: DataType.TEXT, field: "interviewer_id" })
-  declare interviewerId: string; // INYYMM####
+  @Unique
+  @Column({ type: DataType.STRING, allowNull: false, field: "interviewer_id" })
+  declare interviewerId: string;
 
   @Column({ type: DataType.TEXT, allowNull: true })
   declare name: string | null;
