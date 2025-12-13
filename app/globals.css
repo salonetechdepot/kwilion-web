@@ -12,10 +12,10 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.01 250);
   /* Deep blue primary for trust and authority */
-  --primary: oklch(0.28 0.08 250);
+  --primary: oklch(28.06% 0.0793 249.944);
   --primary-foreground: oklch(0.99 0 0);
   /* Vibrant orange accent for energy and action */
-  --accent: oklch(0.65 0.19 45);
+  --accent: oklch(65.025% 0.18864 44.14);
   --accent-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.35 0.06 250);
   --secondary-foreground: oklch(0.99 0 0);

@@ -131,7 +131,7 @@ export function Footer({
 
         <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center text-sm text-primary-foreground/60">
           <p>
-            &copy; {new Date().getFullYear()} Roar Byte Tech Solutions LLC. All
+            &copy; {new Date().getFullYear()} RoarByte Tech Solutions LLC. All
             rights reserved.
           </p>
         </div>

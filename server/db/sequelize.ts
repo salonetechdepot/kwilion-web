@@ -4,8 +4,10 @@ import { QueryTypes } from "sequelize";
 import pg from "pg";
 
 // Import concrete classes (no barrels)
-import Contact from "@/server/models/Contact.model";
-import User from "@/server/models/User.model";
+import Contact from "../models/Contact.model";
+import User from "../models/User.model";
+import Interviewer from "../models/Interviewer.model";
+import Submission from "../models/Submission.model";
 
 const g = global as unknown as { __sequelize?: Sequelize };
 
@@ -52,7 +54,7 @@ function createSequelize(): Sequelize {
       });
 
   // Register models on creation (binds the actual classes)
-  s.addModels([User, Contact]);
+  s.addModels([User, Contact, Interviewer, Submission]);
   return s;
 }
 
@@ -71,7 +73,7 @@ export function ensureModels(): Sequelize {
   // Force re-add models if they're missing (common in production)
   if (!names.includes("User") || !names.includes("Contact")) {
     console.log("🔄 Re-registering models in production...");
-    s.addModels([User, Contact]);
+    s.addModels([User, Contact, Interviewer, Submission]);
   }
 
   return s;
@@ -94,7 +96,7 @@ export async function ensureConnected(): Promise<Sequelize> {
 }
 
 /** Expose the model classes (optional helpers if you like) */
-export { Contact, User };
+export { Contact, User, Interviewer, Submission };
 
 export async function syncDatabase(opts?: {
   force?: boolean;

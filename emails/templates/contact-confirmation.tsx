@@ -26,7 +26,7 @@ export function ContactConfirmationEmail({
     >
       <div
         style={{
-          background: "linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)",
+          background: "linear-gradient(135deg, #1e3a8a 0%, #1e3a8a 100%)",
           color: "white",
           padding: "30px",
           borderRadius: "8px 8px 0 0",
@@ -36,7 +36,7 @@ export function ContactConfirmationEmail({
         <div
           style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "10px" }}
         >
-          Roar Byte Technology Solutions
+          RoarByte Tech Solutions
         </div>
         <div style={{ fontSize: "14px", opacity: 0.9 }}>
           Amplify Your Vision
@@ -59,8 +59,8 @@ export function ContactConfirmationEmail({
 
         <p>
           We have received your message and appreciate you taking the time to
-          contact us. Our team at Roar Byte Solutions will review your inquiry
-          and get back to you within 24-48 hours.
+          contact us. Our team at Roar Byte Tech Solutions will review your
+          inquiry and get back to you within 24-48 hours.
         </p>
 
         <div
@@ -124,7 +124,7 @@ export function ContactConfirmationEmail({
         <p>
           Best regards,
           <br />
-          <strong>The Roar Byte Team</strong>
+          <strong>The RoarByte Team</strong>
         </p>
       </div>
 
@@ -141,7 +141,7 @@ export function ContactConfirmationEmail({
         }}
       >
         <p>
-          <strong>Roar Byte Technology Solutions</strong>
+          <strong>RoarByte Tech Solutions</strong>
           <br />
           Freetown, Sierra Leone
           <br />
@@ -150,7 +150,7 @@ export function ContactConfirmationEmail({
           </a>
         </p>
         <p style={{ marginTop: "15px", fontSize: "12px" }}>
-          © {new Date().getFullYear()} Roar Byte Technology Solutions. All
+          © {new Date().getFullYear()} RoarByte Technology Solutions. All
           rights reserved.
         </p>
       </div>

@@ -22,8 +22,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title:
-    "Roar Byte Technology Solution - Amplify Your Vision. From Idea to Echo.",
+  title: "RoarByte Tech Solution - Amplify Your Vision.",
   description:
     "Strategic technology consulting, web & app development, workflow automation, and maintenance services. Adapting your business for what's next.",
   generator: "v0.app",
