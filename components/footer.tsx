@@ -63,6 +63,14 @@ export function Footer({
                 </Link>
               </li>
               {/* <li>
+                <Link
+                  href="/careers"
+                  className="hover:text-accent transition-colors"
+                >
+                  Careers
+                </Link>
+              </li> */}
+              {/* <li>
                 <a
                   href={
                     process.env.NEXT_PUBLIC_SURVEY_APP_URL ||

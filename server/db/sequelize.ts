@@ -9,6 +9,11 @@ import User from "../models/User.model";
 import Interviewer from "../models/Interviewer.model";
 import Submission from "../models/Submission.model";
 
+// add imports
+import JobPosting from "../models/JobPosting.model";
+import JobApplication from "../models/JobApplication.model";
+import JobApplicationAttachment from "../models/JobApplicationAttachment.model";
+
 const g = global as unknown as { __sequelize?: Sequelize };
 
 function wantsSSL() {
@@ -54,7 +59,18 @@ function createSequelize(): Sequelize {
       });
 
   // Register models on creation (binds the actual classes)
-  s.addModels([User, Contact, Interviewer, Submission]);
+  // inside createSequelize()
+  s.addModels([
+    User,
+    Contact,
+    Interviewer,
+    Submission,
+
+    // ✅ new models (additive only)
+    JobPosting,
+    JobApplication,
+    JobApplicationAttachment,
+  ]);
   return s;
 }
 
