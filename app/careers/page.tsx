@@ -1,77 +1,186 @@
+// app/careers/page.tsx
+import "server-only";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+import Link from "next/link";
+import { QueryTypes } from "sequelize";
+
+import { ensureConnected } from "@/server/db/sequelize";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import Link from "next/link";
-import { Briefcase, MapPin, Clock } from "lucide-react";
+import { Briefcase, MapPin, Clock, Calendar } from "lucide-react";
 
-const positions = [
-  {
-    id: "enumerator",
-    title: "Enumerator",
-    location: "Field",
-    type: "Contract",
-    description:
-      "Conduct surveys and collect data in assigned areas, ensuring accurate and timely information gathering for research and analysis purposes.",
-    requirements: [
-      "High school diploma or equivalent required",
-      "Strong communication and interpersonal skills",
-      "Ability to work independently in field settings",
-      "Basic computer literacy and smartphone proficiency",
-      "Attention to detail and accuracy in data collection",
-      "Willingness to travel within assigned regions",
-    ],
-  },
-  {
-    id: "admin-support",
-    title: "Admin Support",
-    location: "Office",
-    type: "Contract",
-    description:
-      "Provide comprehensive administrative support to ensure smooth daily operations, including scheduling, correspondence, and office management tasks.",
-    requirements: [
-      "Associate degree or equivalent experience",
-      "Proficiency in Microsoft Office Suite (Word, Excel, PowerPoint)",
-      "Excellent organizational and time management skills",
-      "Strong written and verbal communication abilities",
-      "Experience with office management systems",
-      "Professional demeanor and customer service orientation",
-    ],
-  },
-  {
-    id: "data-quality-officer",
-    title: "Data Quality Officer",
-    location: "Office",
-    type: "Contract",
-    description:
-      "Monitor, analyze, and ensure the quality and integrity of collected data through systematic validation processes and quality control measures.",
-    requirements: [
-      "Bachelor's degree in Statistics, Data Science, or related field",
-      "Experience with data validation and quality assurance",
-      "Proficiency in data analysis tools (Excel, SPSS, or similar)",
-      "Strong analytical and problem-solving skills",
-      "Understanding of data collection methodologies",
-      "Ability to identify patterns and anomalies in datasets",
-    ],
-  },
-  {
-    id: "team-lead",
-    title: "Team Lead/Field Coordinator",
-    location: "Field/Office",
-    type: "Contract",
-    description:
-      "Lead and coordinate field teams, ensuring effective data collection operations while managing team performance and stakeholder communications.",
-    requirements: [
-      "Bachelor's degree and 3+ years of relevant experience",
-      "Proven leadership and team management skills",
-      "Experience coordinating field operations",
-      "Strong project management and organizational abilities",
-      "Excellent communication and stakeholder management",
-      "Problem-solving skills and ability to work under pressure",
-      "Valid driver's license may be required",
-    ],
-  },
-];
+import { JobAccordionList } from "@/components/careers/JobAccordionList";
 
-export default function CareersPage() {
+type JobPostingRow = {
+  id: string;
+  jobCode: string; // ✅ add this
+  title: string;
+  slug: string;
+  department: string | null;
+  location: string | null;
+  employmentType: string | null;
+  description: string | null; // big text with headings/bullets
+  requirements: string | null; // big text with headings/bullets
+  publishedAt: string | null;
+  closesAt: string | null;
+};
+
+type Section = {
+  title: string;
+  paragraphs: string[];
+  bullets: string[];
+};
+
+function splitLines(text: string) {
+  return text
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((l) => l.trimEnd());
+}
+
+function isHeading(line: string) {
+  const t = line.trim();
+  if (!t) return false;
+
+  // Examples: "Role Summary", "Key Responsibilities", "Qualifications and Experience"
+  // Also allow "Education:" / "Experience:" etc
+  const known = new Set([
+    "Role Summary",
+    "Key Responsibilities",
+    "Requirements",
+    "Qualifications and Experience",
+    "Education",
+    "Experience",
+    "Core Competencies",
+    "Language & Other Requirements",
+    "Language and Other Requirements",
+    "Employment Type",
+    "Department",
+    "Location",
+  ]);
+
+  const noColon = t.replace(/:$/, "");
+  if (known.has(noColon)) return true;
+
+  // Generic: Title Case-ish heading, not too long, no period
+  const looksLike =
+    t.length <= 48 && !t.endsWith(".") && /^[A-Z][A-Za-z0-9 &/()-]+:?$/.test(t);
+
+  return looksLike;
+}
+
+function isBullet(line: string) {
+  const t = line.trim();
+  return /^[-•*]\s+/.test(t);
+}
+
+function stripBullet(line: string) {
+  return line
+    .trim()
+    .replace(/^[-•*]\s+/, "")
+    .trim();
+}
+
+function parseJobSections(job: JobPostingRow): Section[] {
+  // We take the big text blobs and parse headings/bullets/paragraphs.
+  // If requirements exists, we append it so it becomes its own section too.
+  const pieces: string[] = [];
+  if (job.description) pieces.push(job.description.trim());
+
+  // If requirements already includes "Requirements" heading, don't double it.
+  if (job.requirements?.trim()) {
+    const req = job.requirements.trim();
+    if (/^requirements\b/i.test(req)) pieces.push(req);
+    else pieces.push(`Requirements\n${req}`);
+  }
+
+  const text = pieces.join("\n\n").trim();
+  if (!text) return [];
+
+  const lines = splitLines(text);
+
+  const sections: Section[] = [];
+  let current: Section = { title: "Details", paragraphs: [], bullets: [] };
+
+  const flush = () => {
+    // remove empties
+    current.paragraphs = current.paragraphs
+      .map((p) => p.trim())
+      .filter(Boolean);
+    current.bullets = current.bullets.map((b) => b.trim()).filter(Boolean);
+    if (current.paragraphs.length || current.bullets.length)
+      sections.push(current);
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const line = raw.trim();
+
+    if (!line) continue;
+
+    if (isHeading(line)) {
+      flush();
+      current = {
+        title: line.replace(/:$/, "").trim(),
+        paragraphs: [],
+        bullets: [],
+      };
+      continue;
+    }
+
+    if (isBullet(line)) {
+      current.bullets.push(stripBullet(line));
+      continue;
+    }
+
+    // paragraph: merge consecutive lines into a paragraph
+    current.paragraphs.push(line);
+  }
+
+  flush();
+  return sections;
+}
+
+function formatDate(d: string | null) {
+  if (!d) return "—";
+  const dt = new Date(d);
+  if (!Number.isFinite(dt.getTime())) return "—";
+  return dt.toLocaleDateString();
+}
+
+export default async function CareersPage() {
+  const sequelize = await ensureConnected();
+
+  const items = (await sequelize.query(
+    `
+      SELECT
+        id,
+        job_code AS "jobCode",
+        title,
+        slug,
+        department,
+        location,
+        employment_type AS "employmentType",
+        description,
+        requirements,
+        published_at AS "publishedAt",
+        closes_at AS "closesAt"
+      FROM job_postings
+      WHERE status = 'published'
+        AND (closes_at IS NULL OR closes_at >= NOW())
+      ORDER BY updated_at DESC, created_at DESC
+      LIMIT 200
+  `,
+    { type: QueryTypes.SELECT }
+  )) as JobPostingRow[];
+
+  const itemsWithSections = items.map((job) => ({
+    ...job,
+    sections: parseJobSections(job),
+  }));
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -81,7 +190,7 @@ export default function CareersPage() {
             Join Our Team
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl text-pretty leading-relaxed">
-            We're looking for talented individuals to help us drive impact
+            We&apos;re looking for talented individuals to help us drive impact
             through data collection and field operations. Explore our open
             positions and find your next career opportunity.
           </p>
@@ -90,68 +199,18 @@ export default function CareersPage() {
 
       {/* Positions List */}
       <div className="container mx-auto px-4 py-12 max-w-5xl">
-        <div className="space-y-6">
-          {positions.map((position) => (
-            <Card
-              key={position.id}
-              className="p-6 md:p-8 hover:shadow-lg transition-shadow"
-            >
-              <div className="space-y-4">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="space-y-2">
-                    <h2 className="text-2xl font-semibold tracking-tight">
-                      {position.title}
-                    </h2>
-                    <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4" />
-                        <span>{position.location}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4" />
-                        <span>{position.type}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <Button asChild className="md:shrink-0 bg-accent">
-                    <Link href={`/careers/apply?position=${position.id}`}>
-                      Apply Now
-                    </Link>
-                  </Button>
-                </div>
-
-                {/* Description */}
-                <p className="text-muted-foreground leading-relaxed text-pretty">
-                  {position.description}
-                </p>
-
-                {/* Requirements */}
-                <div className="space-y-3 pt-2">
-                  <h3 className="font-medium flex items-center gap-2">
-                    <Briefcase className="w-4 h-4" />
-                    Requirements
-                  </h3>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    {position.requirements.map((req, index) => (
-                      <li key={index} className="flex gap-2 leading-relaxed">
-                        <span className="text-foreground mt-1.5 shrink-0">
-                          •
-                        </span>
-                        <span className="text-pretty">{req}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        {itemsWithSections.length === 0 ? (
+          <div className="py-10 text-center text-muted-foreground">
+            No open positions right now.
+          </div>
+        ) : (
+          <JobAccordionList items={itemsWithSections as any} />
+        )}
 
         {/* Footer CTA */}
         <div className="mt-16 text-center space-y-4">
           <p className="text-muted-foreground">
-            Don't see the right position for you?
+            Don&apos;t see the right position for you?
           </p>
           <Button variant="outline" asChild>
             <Link href="/careers/apply">Submit General Application</Link>

@@ -1,4 +1,4 @@
-interface TeamNotificationEmailProps {
+export interface TeamNotificationEmailProps {
   firstName: string;
   lastName: string;
   email: string;
@@ -10,6 +10,8 @@ interface TeamNotificationEmailProps {
   experience?: string;
   applicationDate: string;
   applicationId?: string; // ✅ ADD THIS
+  applicationReference?: string; // ✅ add this
+  jobCode?: string; // ✅ optional (if you pass it)
 }
 
 export function TeamNotificationEmail({
@@ -23,6 +25,8 @@ export function TeamNotificationEmail({
   coverLetter,
   experience,
   applicationDate,
+  applicationReference,
+  jobCode,
 }: TeamNotificationEmailProps) {
   return (
     <div
@@ -178,6 +182,21 @@ export function TeamNotificationEmail({
           </div>
         </div>
       )}
+
+      {applicationReference ? (
+        <p style={{ fontSize: 12, margin: "8px 0 0 0", opacity: 0.85 }}>
+          Reference:{" "}
+          <span style={{ fontFamily: "monospace" }}>
+            {applicationReference}
+          </span>
+        </p>
+      ) : null}
+
+      {jobCode ? (
+        <p style={{ fontSize: 12, margin: "6px 0 0 0", opacity: 0.85 }}>
+          Job Code: <span style={{ fontFamily: "monospace" }}>{jobCode}</span>
+        </p>
+      ) : null}
 
       {coverLetter && (
         <div style={{ marginBottom: "25px" }}>

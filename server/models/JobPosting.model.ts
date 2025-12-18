@@ -33,6 +33,10 @@ export default class JobPosting extends Model<
   @Column(DataType.UUID)
   declare id: CreationOptional<string>;
 
+  @Index({ unique: true })
+  @Column({ type: DataType.STRING(32), allowNull: false, field: "job_code" })
+  declare jobCode: string;
+
   @Index
   @Column({ type: DataType.TEXT, allowNull: false })
   declare title: string;
@@ -57,7 +61,7 @@ export default class JobPosting extends Model<
   @Column({ type: DataType.TEXT, allowNull: true })
   declare requirements: string | null;
 
-  @Default("published")
+  @Default("draft")
   @Column({
     type: DataType.ENUM("draft", "published", "closed"),
     allowNull: false,

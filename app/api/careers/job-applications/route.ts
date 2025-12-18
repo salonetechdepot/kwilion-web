@@ -5,8 +5,6 @@ import crypto from "crypto";
 
 import resend from "@/emails/resend";
 import { TeamNotificationEmail, ApplicantConfirmationEmail } from "@/emails";
-
-// ✅ shared helper ONLY (no inline JSON.parse in this file)
 import { uploadToGCS } from "@/lib/gcs";
 
 export const runtime = "nodejs";
@@ -30,6 +28,12 @@ function getOptionalString(form: FormData, key: string) {
   return typeof v === "string" ? v.trim() : null;
 }
 
+function isUuid(v: string) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+    v
+  );
+}
+
 function safeSlug(v?: string | null) {
   return (v || "general")
     .toLowerCase()
@@ -37,7 +41,15 @@ function safeSlug(v?: string | null) {
     .replace(/(^-|-$)/g, "");
 }
 
-/* -------------------------------- route -------------------------------- */
+type JobRow = {
+  id: string;
+  jobCode: string;
+  title: string;
+  slug: string;
+  status: "draft" | "published" | "closed";
+  publishedAt: string | null;
+  closesAt: string | null;
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -59,11 +71,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // ✅ NEW: jobPostingId is the source of truth (from Apply page)
+    const jobPostingId = getOptionalString(form, "jobPostingId");
+    if (jobPostingId && !isUuid(jobPostingId)) {
+      return NextResponse.json(
+        { ok: false, error: "Invalid jobPostingId" },
+        { status: 400 }
+      );
+    }
+
     const body = {
-      jobId: getOptionalString(form, "jobId"),
+      jobPostingId: jobPostingId || null,
+
+      // Keep this for "general application" fallback only.
+      // Do NOT rely on it for real postings.
       position:
         getOptionalString(form, "position") ||
-        getOptionalString(form, "positionKey"),
+        getOptionalString(form, "positionKey") ||
+        null,
+
       firstName: getString(form, "firstName"),
       middleName: getOptionalString(form, "middleName"),
       lastName: getString(form, "lastName"),
@@ -89,7 +115,6 @@ export async function POST(request: NextRequest) {
       availability: getString(form, "availability"),
     };
 
-    // ✅ Typed required keys (fixes body[k] TS error)
     type Body = typeof body;
     type RequiredKey =
       | "firstName"
@@ -147,19 +172,59 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const sequelize = await ensureConnected();
+
+    /* ------------------- Validate job posting if provided ------------------- */
+    let job: JobRow | null = null;
+
+    if (body.jobPostingId) {
+      const rows = (await sequelize.query(
+        `
+        SELECT
+          id,
+          job_code AS "jobCode",
+          title,
+          slug,
+          status,
+          published_at AS "publishedAt",
+          closes_at AS "closesAt"
+        FROM job_postings
+        WHERE id = $1
+          AND status = 'published'
+          AND (closes_at IS NULL OR closes_at >= NOW())
+        LIMIT 1
+        `,
+        { bind: [body.jobPostingId], type: QueryTypes.SELECT }
+      )) as any[];
+
+      job = (rows?.[0] as JobRow) ?? null;
+
+      if (!job) {
+        return NextResponse.json(
+          {
+            ok: false,
+            error: "Job not found, not published, or already closed.",
+          },
+          { status: 400 }
+        );
+      }
+    }
+
+    const positionLabel = job?.title || body.position || "General Application";
+    const positionKey = job?.slug || safeSlug(body.position || "general");
+
     /* ---------------------------- GCS upload ---------------------------- */
 
     const bucketName = process.env.GCS_BUCKET_NAME;
     if (!bucketName) throw new Error("GCS_BUCKET_NAME is not set");
 
     const prefix = process.env.GCS_UPLOAD_PREFIX || "careers/resumes";
-    const positionSlug = safeSlug(body.position);
     const ext = resumeFile.name?.includes(".")
       ? resumeFile.name.split(".").pop()
       : "bin";
 
     const rand = crypto.randomBytes(12).toString("hex");
-    const objectPath = `${prefix}/${positionSlug}/${rand}.${ext}`;
+    const objectPath = `${prefix}/${positionKey}/${rand}.${ext}`;
 
     const buffer = Buffer.from(await resumeFile.arrayBuffer());
 
@@ -172,14 +237,13 @@ export async function POST(request: NextRequest) {
 
     /* ---------------------------- DB insert ---------------------------- */
 
-    const sequelize = await ensureConnected();
+    type CreatedRow = { id: string; reference: string };
 
-    type CreatedRow = { id: string };
-
-    const rows = await sequelize.query<CreatedRow>(
+    const createdRows = await sequelize.query<CreatedRow>(
       `
       INSERT INTO job_applications (
         id,
+        reference,
         job_posting_id,
         position_key,
         first_name,
@@ -210,6 +274,7 @@ export async function POST(request: NextRequest) {
       )
       VALUES (
         gen_random_uuid(),
+        DEFAULT,
         $1, $2,
         $3, $4, $5,
         $6, $7,
@@ -221,12 +286,12 @@ export async function POST(request: NextRequest) {
         $24::jsonb,
         NOW(), NOW()
       )
-      RETURNING id
+      RETURNING id, reference
       `,
       {
         bind: [
-          body.jobId || null,
-          body.position || null,
+          body.jobPostingId, // $1 job_posting_id
+          job?.slug || body.position || null, // $2 position_key (keep your column)
           body.firstName,
           body.middleName || null,
           body.lastName,
@@ -250,6 +315,17 @@ export async function POST(request: NextRequest) {
           body.availability,
           JSON.stringify({
             ...body,
+            positionLabel,
+            job: job
+              ? {
+                  id: job.id,
+                  jobCode: job.jobCode,
+                  title: job.title,
+                  slug: job.slug,
+                  publishedAt: job.publishedAt,
+                  closesAt: job.closesAt,
+                }
+              : null,
             resume: {
               originalName: resumeFile.name,
               size: resumeFile.size,
@@ -264,10 +340,13 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    const applicationId = rows?.[0]?.id;
-    if (!applicationId) throw new Error("Insert failed: no id returned.");
+    const created = createdRows?.[0];
+    if (!created?.id || !created?.reference) {
+      throw new Error("Insert failed: no id/reference returned.");
+    }
 
-    // attachment record
+    /* -------------------------- attachment record -------------------------- */
+
     await sequelize.query(
       `
       INSERT INTO job_application_attachments (
@@ -294,7 +373,7 @@ export async function POST(request: NextRequest) {
       `,
       {
         bind: [
-          applicationId,
+          created.id,
           resumeFile.name,
           storageUrl,
           resumeFile.type || null,
@@ -314,8 +393,8 @@ export async function POST(request: NextRequest) {
     const staffTo = parseList(process.env.RESEND_STAFF_TO);
     const bcc = parseList(process.env.RESEND_BCC);
 
-    const positionLabel = body.position || "General Application";
     const applicationDate = new Date().toISOString();
+    const jobCode = job?.jobCode || null;
 
     if (canSend) {
       const tasks: Promise<any>[] = [];
@@ -338,7 +417,9 @@ export async function POST(request: NextRequest) {
               coverLetter: body.coverLetter || undefined,
               experience: body.experience || undefined,
               applicationDate,
-              applicationId,
+              applicationId: created.id,
+              applicationReference: created.reference, // ✅ add to email template
+              jobCode: jobCode || undefined, // ✅ optional
             }),
           })
         );
@@ -353,6 +434,7 @@ export async function POST(request: NextRequest) {
             firstName: body.firstName,
             lastName: body.lastName,
             position: positionLabel,
+            reference: created.reference, // ✅ add to template
           }),
         })
       );
@@ -363,7 +445,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         ok: true,
-        id: applicationId,
+        reference: created.reference, // ✅ UI uses this
         resume: { storageUrl, bucket: bucketName, objectPath },
         email: { attempted: canSend },
       },

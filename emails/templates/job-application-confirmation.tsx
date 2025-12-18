@@ -10,6 +10,9 @@ export interface TeamNotificationEmailProps {
   experience?: string | null;
   applicationDate: string;
   applicationId?: string;
+  applicationReference?: string; // ✅ add this
+  jobCode?: string; // ✅ optional (if you pass it)
+  reference?: string; // ✅ add
 }
 
 export function TeamNotificationEmail(props: TeamNotificationEmailProps) {
@@ -236,12 +239,14 @@ export interface ApplicantConfirmationEmailProps {
   firstName: string;
   lastName: string;
   position: string;
+  reference?: string; // ✅ add
 }
 
 export function ApplicantConfirmationEmail({
   firstName,
   lastName,
   position,
+  reference,
 }: ApplicantConfirmationEmailProps) {
   return (
     <div
@@ -272,6 +277,23 @@ export function ApplicantConfirmationEmail({
         Thank you for your interest in the <strong>{position}</strong> position.
         We’ve received your application and it’s now under review.
       </p>
+
+      {reference ? (
+        <div
+          style={{
+            backgroundColor: "#f5f5f5",
+            border: "1px solid #e0e0e0",
+            borderRadius: 4,
+            padding: 14,
+            marginBottom: 18,
+          }}
+        >
+          <div style={{ fontSize: 12, color: "#666" }}>Reference</div>
+          <div style={{ fontFamily: "monospace", fontSize: 14 }}>
+            {reference}
+          </div>
+        </div>
+      ) : null}
 
       <div
         style={{
