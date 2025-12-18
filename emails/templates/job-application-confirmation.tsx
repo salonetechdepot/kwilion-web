@@ -1,3 +1,6 @@
+import { Logo } from "@/components/logo";
+import { Image } from "lucide-react";
+
 export interface TeamNotificationEmailProps {
   firstName: string;
   lastName: string;
@@ -328,11 +331,47 @@ export function ApplicantConfirmationEmail({
       <p style={{ fontSize: 16, lineHeight: 1.6, marginBottom: 10 }}>
         Best regards,
       </p>
-      <p
-        style={{ fontSize: 16, lineHeight: 1.6, fontWeight: "bold", margin: 0 }}
+      <table
+        role="presentation"
+        cellPadding={0}
+        cellSpacing={0}
+        style={{ marginTop: 24 }}
       >
-        The Recruitment Team
-      </p>
+        <tr>
+          <td style={{ paddingRight: 10, verticalAlign: "middle" }}>
+            <img
+              src="https://roarbyte.com/roarbyte-logo.png"
+              alt="Roar Byte Tech Solutions"
+              width={28}
+              height={28}
+              style={{ display: "block", borderRadius: 4 }}
+            />
+          </td>
+
+          <td style={{ verticalAlign: "middle" }}>
+            <p
+              style={{
+                fontSize: 15,
+                lineHeight: 1.4,
+                fontWeight: "bold",
+                margin: 0,
+                color: "#000",
+              }}
+            >
+              The Recruitment Team
+            </p>
+            <p
+              style={{
+                fontSize: 13,
+                margin: "2px 0 0 0",
+                color: "#444",
+              }}
+            >
+              Roar Byte Tech Solutions
+            </p>
+          </td>
+        </tr>
+      </table>
 
       <div
         style={{

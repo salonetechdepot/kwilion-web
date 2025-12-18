@@ -34,6 +34,33 @@ type JobLite = {
   department: string | null;
 };
 
+function calcAge(dobISO: string) {
+  // dobISO like "YYYY-MM-DD"
+  const dob = new Date(`${dobISO}T00:00:00`);
+  if (!Number.isFinite(dob.getTime())) return NaN;
+
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+  return age;
+}
+
+function normEmail(v: string) {
+  return (v || "").trim().toLowerCase();
+}
+
+function normPhone(v: string) {
+  // keep digits only (simple, works across formats)
+  return (v || "").replace(/\D/g, "");
+}
+
+function normName(first: string, last: string) {
+  return `${(first || "").trim().toLowerCase()} ${(last || "")
+    .trim()
+    .toLowerCase()}`.trim();
+}
+
 export default function ApplyPage() {
   const searchParams = useSearchParams();
   const jobId = searchParams.get("jobId"); // ✅ use jobId (uuid) from /careers
@@ -44,6 +71,10 @@ export default function ApplyPage() {
 
   const [availabilityValue, setAvailabilityValue] = useState("");
   const [submit, setSubmit] = useState<SubmitState>({ status: "idle" });
+
+  const [refRelationship, setRefRelationship] = useState("");
+
+  const [clientError, setClientError] = useState<string | null>(null);
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -95,15 +126,70 @@ export default function ApplyPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setClientError(null);
+
+    const formEl = e.currentTarget;
+    const fd = new FormData(formEl);
+
+    // Age >= 18
+    const dob = String(fd.get("dob") || "").trim();
+    const age = calcAge(dob);
+    if (!dob || !Number.isFinite(age)) {
+      setClientError("Please enter a valid date of birth.");
+      setSubmit({ status: "idle" });
+      return;
+    }
+    if (age < 18) {
+      setClientError("You must be at least 18 years old to apply.");
+      setSubmit({ status: "idle" });
+      return;
+    }
+
+    // Reference relationship required (you added this field)
+    const rel = String(fd.get("refRelationship") || "").trim();
+    if (!rel) {
+      setClientError(
+        "Please provide your relationship to the reference/guarantor."
+      );
+      setSubmit({ status: "idle" });
+      return;
+    }
+
+    // Applicant cannot be the reference (compare name/email/phone)
+    const applicantName = normName(
+      String(fd.get("firstName") || ""),
+      String(fd.get("lastName") || "")
+    );
+    const refName = normName(
+      String(fd.get("refFirstName") || ""),
+      String(fd.get("refLastName") || "")
+    );
+
+    const applicantEmail = normEmail(String(fd.get("email") || ""));
+    const refEmail = normEmail(String(fd.get("refEmail") || ""));
+
+    const applicantPhone = normPhone(String(fd.get("phone") || ""));
+    const refPhone = normPhone(String(fd.get("refPhone") || ""));
+
+    // If they provided reference fields, ensure they don't match applicant
+    const sameName = applicantName && refName && applicantName === refName;
+    const sameEmail = applicantEmail && refEmail && applicantEmail === refEmail;
+    const samePhone = applicantPhone && refPhone && applicantPhone === refPhone;
+
+    if (sameName || sameEmail || samePhone) {
+      setClientError(
+        "Your reference/guarantor cannot be the applicant. Please use a different person for reference details."
+      );
+      setSubmit({ status: "idle" });
+      return;
+    }
+
     setSubmit({ status: "loading" });
 
-    const fd = new FormData(e.currentTarget);
-
-    // ✅ We submit jobPostingId if we have it; otherwise it’s a general application
+    // ✅ set jobPostingId + availability like you already do
     if (job?.id) fd.set("jobPostingId", job.id);
     else fd.delete("jobPostingId");
 
-    // ✅ keep availability (Select is not native)
     fd.set("availability", availabilityValue);
 
     try {
@@ -117,7 +203,6 @@ export default function ApplyPage() {
         throw new Error(json?.error || "Failed to submit application");
       }
 
-      // ✅ use reference, not UUID
       setSubmit({ status: "success", reference: json.reference });
     } catch (err) {
       setSubmit({
@@ -127,6 +212,41 @@ export default function ApplyPage() {
       });
     }
   };
+
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setSubmit({ status: "loading" });
+
+  //   const fd = new FormData(e.currentTarget);
+
+  //   // ✅ We submit jobPostingId if we have it; otherwise it’s a general application
+  //   if (job?.id) fd.set("jobPostingId", job.id);
+  //   else fd.delete("jobPostingId");
+
+  //   // ✅ keep availability (Select is not native)
+  //   fd.set("availability", availabilityValue);
+
+  //   try {
+  //     const res = await fetch("/api/careers/job-applications", {
+  //       method: "POST",
+  //       body: fd,
+  //     });
+
+  //     const json = await res.json().catch(() => null);
+  //     if (!res.ok || !json?.ok) {
+  //       throw new Error(json?.error || "Failed to submit application");
+  //     }
+
+  //     // ✅ use reference, not UUID
+  //     setSubmit({ status: "success", reference: json.reference });
+  //   } catch (err) {
+  //     setSubmit({
+  //       status: "error",
+  //       message:
+  //         err instanceof Error ? err.message : "Failed to submit application",
+  //     });
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-background">
@@ -264,6 +384,7 @@ export default function ApplyPage() {
 
               {/* Contact Information */}
               <h3 className="font-bold">Contacts</h3>
+
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address *</Label>
@@ -276,8 +397,8 @@ export default function ApplyPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="addressLine1">Address *</Label>
-                <Input id="addressLine1" name="addressLine1" required />
+                <Label htmlFor="addressLine1">Address</Label>
+                <Input id="addressLine1" name="addressLine1" />
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
@@ -320,6 +441,20 @@ export default function ApplyPage() {
                 <div className="space-y-2">
                   <Label htmlFor="refEmail">Email Address</Label>
                   <Input id="refEmail" name="refEmail" type="email" />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="refRelationship">
+                    Relationship to Applicant *
+                  </Label>
+                  <Input
+                    id="refRelationship"
+                    name="refRelationship"
+                    placeholder="e.g., Parent, Sibling, Supervisor, Friend"
+                    required
+                  />
                 </div>
               </div>
 
@@ -400,6 +535,10 @@ export default function ApplyPage() {
                   value={availabilityValue}
                 />
               </div>
+
+              {clientError ? (
+                <p className="text-sm text-red-600">{clientError}</p>
+              ) : null}
 
               {/* Submit */}
               <div className="pt-4 space-y-3">
