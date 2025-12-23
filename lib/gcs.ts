@@ -1,65 +1,60 @@
-// server/lib/gcs.ts
+// server/lib/gcs.ts (or lib/gcs.ts — must match your @/lib/gcs import)
 import { Storage as GCSStorage } from "@google-cloud/storage";
 
 let _storage: GCSStorage | null = null;
 
-function decodeMaybeBase64(raw: string) {
-  const s = raw.trim();
+function must(name: string) {
+  const v = process.env[name];
+  if (!v) throw new Error(`${name} is not set`);
+  return v;
+}
 
-  // If it's already JSON, return as-is
-  if (s.startsWith("{")) return s;
-
-  // Otherwise assume base64
-  return Buffer.from(s, "base64").toString("utf8").trim();
+function normalizePrivateKey(raw: string) {
+  // Render/Vercel sometimes keep wrapping quotes; remove them
+  const unquoted = raw
+    .trim()
+    .replace(/^"(.*)"$/, "$1")
+    .replace(/^'(.*)'$/, "$1");
+  // Convert literal \n sequences into real newlines
+  return unquoted.replace(/\\n/g, "\n").trim();
 }
 
 export function getGCS() {
   if (_storage) return _storage;
 
-  const raw = process.env.GCP_PRIVATE_KEY;
-  if (!raw) throw new Error("GCP_PRIVATE_KEY is not set");
+  const projectId = must("GCS_PROJECT_ID");
+  const clientEmail = must("GCS_CLIENT_EMAIL");
+  const privateKey = normalizePrivateKey(must("GCS_PRIVATE_KEY"));
 
-  // Strip common copy/paste junk
-  const cleaned = raw
-    .trim()
-    .replace(/%$/, "")
-    .replace(/^"(.*)"$/, "$1");
-
-  const jsonText = decodeMaybeBase64(cleaned);
-  const credentials = JSON.parse(jsonText);
-
-  // Fix escaped newlines in private_key
-  if (typeof credentials.private_key === "string") {
-    credentials.private_key = credentials.private_key.replace(/\\n/g, "\n");
-  }
-
-  if (!credentials.client_email) {
-    throw new Error("Service account JSON missing client_email.");
+  // sanity check to avoid silent bad config
+  if (
+    !privateKey.includes("BEGIN PRIVATE KEY") ||
+    !privateKey.includes("END PRIVATE KEY")
+  ) {
+    throw new Error("GCS_PRIVATE_KEY does not look like a valid PEM key");
   }
 
   _storage = new GCSStorage({
-    projectId: credentials.project_id,
-    credentials,
+    projectId,
+    credentials: {
+      client_email: clientEmail,
+      private_key: privateKey,
+    },
   });
 
   return _storage;
 }
 
 export async function uploadToGCS(params: {
-  bucketName: string;
+  bucketName?: string; // optional: defaults to env GCS_BUCKET_NAME
   objectPath: string;
   buffer: Buffer;
   contentType?: string;
 }) {
   const storage = getGCS();
-  const bucket = storage.bucket(params.bucketName);
 
-  const [exists] = await bucket.exists();
-  if (!exists) {
-    throw new Error(
-      `GCS bucket "${params.bucketName}" not found or not accessible by this service account.`
-    );
-  }
+  const bucketName = params.bucketName || must("GCS_BUCKET_NAME");
+  const bucket = storage.bucket(bucketName);
 
   const file = bucket.file(params.objectPath);
 
@@ -75,5 +70,5 @@ export async function uploadToGCS(params: {
     stream.end(params.buffer);
   });
 
-  return `gs://${params.bucketName}/${params.objectPath}`;
+  return `gs://${bucketName}/${params.objectPath}`;
 }
