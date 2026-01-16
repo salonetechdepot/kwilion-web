@@ -17,7 +17,8 @@ export function Navigation({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const DASHBOARD_URL =
-    process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3000/login";
+    process.env.NEXT_PUBLIC_DASHBOARD_URL ||
+    "https://roarbyte-dashboard.onrender.com/login";
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
