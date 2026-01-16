@@ -16,6 +16,9 @@ export function Navigation({
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const DASHBOARD_URL =
+    process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3000/login";
+
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,6 +54,14 @@ export function Navigation({
             >
               About Us
             </Link>
+            <a
+              href={DASHBOARD_URL}
+              className="text-sm font-medium hover:text-accent text-primary transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dashboard
+            </a>
             <Link href="/contact">
               <Button className="bg-accent hover:bg-accent/90 hover:text-primary">
                 Get Started
@@ -103,6 +114,16 @@ export function Navigation({
             >
               About Us
             </Link>
+            <a
+              href={DASHBOARD_URL}
+              className="block text-sm font-medium hover:text-accent text-primary transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dashboard
+            </a>
+
             <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
               <Button className="w-full bg-accent hover:bg-accent/90 hover:text-primary">
                 Get Started

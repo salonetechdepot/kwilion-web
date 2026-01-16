@@ -70,19 +70,19 @@ export function Footer({
                   Careers
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <a
                   href={
                     process.env.NEXT_PUBLIC_SURVEY_APP_URL ||
-                    "https://your-survey-app.com"
+                    "https://roarbyte-dashboard.onrender.com/login"
                   }
                   className="hover:text-accent transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Surveys
+                  Dashboard
                 </a>
-              </li> */}
+              </li>
             </ul>
           </div>
 
