@@ -18,7 +18,7 @@ export function Navigation({
 
   const DASHBOARD_URL =
     process.env.NEXT_PUBLIC_DASHBOARD_URL ||
-    "https://roarbyte-dashboard.onrender.com/login";
+    "https://roarbyte-dashboard-prod.onrender.com/login";
 
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
