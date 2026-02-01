@@ -74,7 +74,7 @@ export function Footer({
                 <a
                   href={
                     process.env.NEXT_PUBLIC_DASHBOARD_URL ||
-                    "https://roarbyte-dashboard-prod.onrender.com/login"
+                    "https://dashboard.roarbyte.com/login"
                   }
                   className="hover:text-accent transition-colors"
                   target="_blank"
